@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Create a Listing to sell your item</h4>
+  <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')" >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container" style="margin-top: 20px">
+    <div class="form-container col-10">
+      <form [formGroup]="sellProductForm" (ngSubmit)='onSubmit()'>
+        <div class="form-group">
+          <label for="category">Choose a Category</label>
+          <select class="form-control" id="category" name="category" formControlName="category"
+                  required>
+            <option value="" hidden>&#45;&#45;Please choose a category&#45;&#45;</option>
+            <option *ngFor="let cat of categories" [value]="cat.category">{{cat.category}}</option>
+          </select>
+        </div>
+        <div class="form-group ">
+          <label for="name">Product Name</label>
+          <input type="text" id="name" formControlName="prodName" class="form-control">
+        </div>
+        <div class="form-group ">
+          <label for="desc">Product Description</label>
+          <textarea id="desc" rows="7" maxlength="300" formControlName="prodDesc" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group ">
+          <label for="price">Product Price</label>
+          <input type="text" id="price" formControlName="prodPrice" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-warning">
+            Add Listing
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="modal.dismiss('cancel click')">Cancel</button>
+</div>

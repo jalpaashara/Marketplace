@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+  <div class="wrapper">
+    <div class="grid-row">
+      <div class="row1 text-md-left">
+        <h4>Recently Viewed</h4>
+      </div>
+      <div class="row2">
+
+        <div class="card" style="width: 16rem;" *ngFor="let r of recent">
+          <div class="card-body">
+            <img src="{{r.img}}" style="width: 250px; height: 200px; padding-bottom: 10px; margin-bottom: 10px">
+            <h5 class="card-title">{{r.title}}</h5>
+            <p class="card-text">{{r.description}}</p>
+            <button routerLink="/dashboard" class="btn btn-danger">Click to know more</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="row1 text-md-left">
+        <h4>Most Viewed</h4>
+      </div>
+      <div class="row2">
+        <div class="card" style="width: 16rem;" *ngFor="let r of recent">
+          <div class="card-body">
+            <h5 class="card-title">{{r.title}}</h5>
+            <p class="card-text">{{r.description}}</p>
+            <a href="#" class="btn btn-danger">Click to know more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-row2">
+      <div class="row1 text-lg-center">
+        <h3 style="font-family: Snell Roundhand, cursive; letter-spacing: 5px">Shop By Category</h3>
+      </div>
+      <div class="row-cat">
+        <div class="card" style="width: 8rem;" *ngFor="let cat of categories">
+          <div class="card-body">
+            <h5 class="card-title">{{cat.category}}</h5>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+<footer class="foot">&copy; JAMMR 2020</footer>

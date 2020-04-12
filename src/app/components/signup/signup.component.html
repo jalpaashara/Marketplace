@@ -1,0 +1,67 @@
+<div class="container">
+  <p class="fnt-size">New User?</p>
+  <div class="form-container col-10">
+    <!--<div class="authBlock">-->
+    <h4>Sign Up</h4>
+    <form [formGroup]="registerForm" (ngSubmit)='onSubmitRegister()'>
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input type="text" formControlName="firstName" class="form-control" placeholder="First Name"
+                 [ngClass]="{ 'is-invalid': submitted && formVal.firstName.errors }">
+          <div *ngIf="submitted && formVal.firstName.errors" class="invalid-feedback">
+            <div *ngIf="formVal.firstName.errors.required">First Name is required</div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 form-group">
+          <input type="text" formControlName="lastName"  class="form-control" placeholder="Last Name">
+        </div>
+      </div>
+
+      <div class="form-group ">
+        <input type="email" formControlName="email" class="form-control" placeholder="Email Address"
+               [ngClass]="{ 'is-invalid':(submitted && formVal.email.errors) }">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <div *ngIf="submitted && formVal.email.errors" class="invalid-feedback">
+          <div *ngIf="formVal.email.errors.required">Email is required</div>
+          <div *ngIf="formVal.email.errors.email">Enter valid email address</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" formControlName="password" class="form-control"
+               [ngClass]="{ 'is-invalid': (submitted && formVal.password.errors) }" placeholder="Password"/>
+        <div *ngIf="submitted && formVal.password.errors" class="invalid-feedback">
+          <div *ngIf="formVal.password.errors.required">Password is required</div>
+          <div *ngIf="formVal.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password"
+               [ngClass]="{ 'is-invalid': (formVal.confirmPassword.errors && formVal.confirmPassword.errors.notSame) || (submitted && formVal.confirmPassword.errors) }">
+        <div *ngIf="submitted && formVal.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="formVal.confirmPassword.errors.required">Confirm Password is required</div>
+        </div>
+        <!--<div *ngIf="!formVal.confirmPassword.errors.notSame && formVal.confirmPassword.status!='INVALID'">
+          Passwords match
+        </div>-->
+        <div *ngIf="formVal.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="formVal.confirmPassword.errors.notSame">Passwords do not match</div>
+        </div>
+        <!--<div *ngIf="myForm.hasError('notSame')">
+          Passwords do not match
+        </div>-->
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="loading" class="btn badge-info">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Sign Up
+        </button>
+      </div>
+      <label class="error">{{errorMessage}}</label>
+      <label class="success">{{successMessage}}</label>
+    </form>
+  </div>
+</div>

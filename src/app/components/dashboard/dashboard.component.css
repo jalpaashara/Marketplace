@@ -1,0 +1,121 @@
+.container{
+  height: 92vh;
+}
+
+.foot {
+  font-family: "Calibri", sans-serif;
+  font-size: 20px;
+  background-color: #041e42;
+  color: white;
+  margin: 0;
+  padding: 12px 0px;
+  text-align: center;
+}
+
+.wrapper{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  margin-top: 50px;
+  background-color: #f7f7f9;
+}
+
+.grid-row{
+  margin: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.15fr 1fr;
+  /*border-style: solid;*/
+  /*border-color: #041e42;*/
+  box-shadow: 10px 10px 5px 0px #f7f7f9;
+  background-color: #ffffff;
+
+}
+
+.row1{
+  padding: 20px 10px 10px 30px;
+}
+
+.grid-row2{
+  margin: 10px 0px 0px 0px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.30fr 1.5fr;
+  background-color: #ffffff
+}
+
+.row2{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  margin-top: 0px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+}
+
+.row-cat{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2,1fr);
+  grid-gap: 20px;
+}
+
+.card{
+  min-width: 300px;
+}
+
+@media screen and (max-width: 550px) {
+  .wrapper{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin-top: 50px;
+    background-color: #f7f7f9;
+  }
+
+  .grid-row{
+    margin: 10px 0px 0px 0px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.15fr 2fr;
+    /*border-style: solid;*/
+    /*border-color: #041e42;*/
+    box-shadow: 10px 10px 5px 0px #f7f7f9;
+  }
+
+  .grid-row2{
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.15fr 3fr;
+    background-color: #ffffff
+  }
+
+  .row2{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    /*grid-gap: 5px;*/
+  }
+
+  .row-cat{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4,1fr);
+    /*grid-gap: 5px;*/
+  }
+
+  .row1{
+    padding: 30px 0px 0px 30px;
+  }
+
+}

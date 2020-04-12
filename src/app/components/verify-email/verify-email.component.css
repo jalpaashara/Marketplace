@@ -1,0 +1,13 @@
+.container-fluid{
+  height: 84vh;
+}
+
+.foot {
+  font-family: "Calibri", sans-serif;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  margin: 0;
+  padding: 12px 0px;
+  text-align: center;
+}
