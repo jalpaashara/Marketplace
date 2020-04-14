@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
     });
     if (this.isLoggedIn) {
     this.authService.userData.subscribe((res) => {
-        console.log(res);
+        // console.log(res);
         this.userData = res;
       });
     this.getRecentViews();

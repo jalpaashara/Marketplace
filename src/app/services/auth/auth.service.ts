@@ -1,11 +1,9 @@
-import { Injectable, NgZone } from '@angular/core';
-import { User } from '../../models/user';
-import { auth } from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
-import * as firebase from 'firebase';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {User} from '../../models/user';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {Router} from '@angular/router';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +12,10 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 export class AuthService {
   userData: Observable<User>; // Save logged in user data
 
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedIn = new BehaviorSubject<boolean>(this.isSetUserSession());
 
-  get isLoggedIn() {
+  get isLoggedIn(): Observable<boolean> {
+    // @ts-ignore
     return this.loggedIn.asObservable();
   }
 
@@ -24,12 +23,11 @@ export class AuthService {
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router  ) {
-    /* Saving user data in localstorage when
-    logged in and setting up null when logged out */
     this.userData = afAuth.authState;
   }
 
   isSetUserSession(): boolean {
+    console.log('isSetUserSession ' + !!localStorage.getItem('user'));
     return !!localStorage.getItem('user');
   }
 
@@ -37,6 +35,7 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then(res => {
+          console.log('SignIn: ' + res);
           if (res.user.emailVerified) {
             this.router.navigate(['dashboard']);
             this.SetUserData(res.user);

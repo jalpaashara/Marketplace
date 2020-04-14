@@ -1,30 +1,41 @@
-.container{
-  height: 92vh;
+.grid-container {
+  display: grid;
+  grid-template-areas: "header" "wrapper" "footer";
+  grid-template-rows: 4% 92% 4%;
+  grid-template-columns: 1fr;
+  /*height: 100vh;*/
 }
 
+.app-nav { grid-area: header; }
+
 .foot {
+  grid-area: footer;
   font-family: "Calibri", sans-serif;
   font-size: 20px;
   background-color: #041e42;
   color: white;
   margin: 0;
-  padding: 12px 0px;
+  padding-top: 12px;
   text-align: center;
+  /*min-width: 1450px;*/
 }
 
 .wrapper{
+  grid-area: wrapper;
+  /*min-width: 1450px;*/
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  margin-top: 50px;
+  grid-template-rows: 31% 31% 38%;
+  /*margin-top: 50px;*/
   background-color: #f7f7f9;
+  overflow: hidden;
 }
 
 .grid-row{
   margin: 30px;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 0.15fr 1fr;
+  /*grid-template-columns: 1fr;*/
+  grid-template-rows: 18% 82%;
   /*border-style: solid;*/
   /*border-color: #041e42;*/
   box-shadow: 10px 10px 5px 0px #f7f7f9;
@@ -37,7 +48,7 @@
 }
 
 .grid-row2{
-  margin: 10px 0px 0px 0px;
+  margin: 10px 30px 30px 30px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 0.30fr 1.5fr;
@@ -59,13 +70,18 @@
   padding-right: 30px;
   padding-bottom: 30px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2,1fr);
   grid-gap: 20px;
 }
 
-.card{
-  min-width: 300px;
+.card-title{
+  font-size: 18px;
+}
+
+.cat-img{
+  width: 120px;
+  height: 120px;
 }
 
 @media screen and (max-width: 550px) {
@@ -104,18 +120,22 @@
     /*grid-gap: 5px;*/
   }
 
-  .row-cat{
+  /*.row-cat{
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 30px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4,1fr);
-    /*grid-gap: 5px;*/
-  }
+    !*grid-gap: 5px;*!
+  }*/
 
   .row1{
     padding: 30px 0px 0px 30px;
   }
 
+}
+
+.h6-font{
+  font-size: small;
 }

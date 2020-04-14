@@ -17,3 +17,12 @@
 .btn{
   width: 100%;
 }
+
+.dropdown-item{
+  font-size: large;
+}
+
+.dropdown-item:hover{
+  background-color: #041e42;
+  color: #f7f7f9;
+}

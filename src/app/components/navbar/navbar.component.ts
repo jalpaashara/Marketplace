@@ -13,6 +13,7 @@ import {SellProductComponent} from '../sell-product/sell-product.component';
 export class NavbarComponent implements OnInit {
   isCollapsed = true;
   isLoggedIn: boolean;
+  searchForm: any;
   constructor(public authService: AuthService,
               private modalService: NgbModal) {}
 
@@ -21,10 +22,22 @@ export class NavbarComponent implements OnInit {
       console.log(res);
       this.isLoggedIn = res;
     });
-    console.log(this.isLoggedIn);
+    // console.log(this.isLoggedIn);
   }
 
   openAboutModal() {
     const modalRef = this.modalService.open(SellProductComponent, {centered: true, size: 'lg'});
+  }
+
+  SignOut() {
+    this.authService.SignOut()
+      .then(
+        res => {console.log(res); },
+        err => {console.log(err); }
+        );
+  }
+
+  search() {
+
   }
 }

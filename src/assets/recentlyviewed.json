@@ -1,22 +1,27 @@
 [
-  {"img": "https://drscdn.500px.org/photo/150595123/m%3D900/v2?sig=aef689b44c7219effb6c842d9db5c82905f3d9f4c927e01b39e02ab54f420393",
-  "title": "Card Title",
-  "description":  "Some quick example text to build on the card title and make up the bulk of the card's content."
+  { "img": "https://www.ikea.com/us/en/images/products/havsten-2-seat-sofa-in-outdoor__0668266_PE714335_S5.JPG?f=l",
+    "title": "Sofa",
+    "description":  "Bought 2 years back from Ikea. Beige color, perfect for relaxing. Looks new, no stains and in perfect condition for re use",
+    "price": 100
   },
-  {"img": "https://drscdn.500px.org/photo/149290687/m%3D900/v2?sig=12155d1dad04fd4f0e6e5257fb5cffe38f1d9d2d5d67aca66397d62456ee0d3b",
-    "title": "Card Title",
-    "description":  "Some quick example text to build on the card title and make up the bulk of the card's content."
+  { "img": "https://www.ikea.com/us/en/images/products/bleckberget-swivel-chair__0741415_PE742366_S5.JPG?f=l",
+    "title": "Swivel Chair",
+    "description":  "Dark red swivel chair good for studying for long hours.",
+    "price": 25
   },
-  {"img": "https://images.pexels.com/photos/3584430/pexels-photo-3584430.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-    "title": "Card Title",
-    "description":  "Some quick example text to build on the card title and make up the bulk of the card's content."
+  {"img": "https://images-na.ssl-images-amazon.com/images/I/91oiSVwU7OL._AC_SL1500_.jpg",
+    "title": "Electric Kettle",
+    "description":  "Stainless Steel Portable Electric Hot Water Kettle - 1 Liter, Silver.",
+    "price": 10
   },
-  {"img": "",
-    "title": "Card Title",
-    "description":  "Some quick example text to build on the card title and make up the bulk of the card's content."
+  { "img": "https://m.media-amazon.com/images/I/410xQKu2cUL.jpg",
+    "title": "Cloud Computing by Nayan Ruparelia",
+    "description":  "No marks, almost like new.",
+    "price": 5
   },
-  {"img": "",
-    "title": "Card Title",
-    "description":  "Some quick example text to build on the card title and make up the bulk of the card's content."
+  {"img": "https://images-na.ssl-images-amazon.com/images/I/61FF3wtSgwL._AC_SL1500_.jpg",
+    "title": "Electric Kick Scooter",
+    "description":  "Used a year Segway Ninebot ES1 Gen2 Electric Kick Scooter, Lightweight and Foldable, Dark Grey",
+    "price": 275
   }
 ]

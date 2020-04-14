@@ -1,34 +1,42 @@
 [
   { "id": 1,
-    "img": "",
-    "category": "Category 1"
+    "img": "https://secure.img1-fg.wfcdn.com/im/28830642/resize-h800%5Ecompr-r85/7122/71221495/Geometric+Bookcase.jpg",
+    "category": "Furniture"
   },
   { "id": 2,
-    "img": "",
-    "category": "Category 2"
+    "img": "https://asset20.ckassets.com/blog/wp-content/uploads/sites/5/2019/12/Home-Kitchen-Appliances-to-buy-from-BigBasket.jpg",
+    "category": "Home & Kitchen appliances"
   },
   { "id": 3,
-    "img": "",
-    "category": "Category 3"
+    "img": "https://2pwgqm3nczsg1a5kw72u2pcf-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/laptop-accessories.jpg",
+    "category": "Computers & accessories"
   },
   { "id": 4,
-    "img": "",
-    "category": "Category 4"
+    "img": "https://image-us.samsung.com/us/smartphones/galaxy-s20/galaxy-s20-plus/Cloud-Blue/Y2_Lockup_CloudBlue-1600x1200.jpg?$product-details-jpg",
+    "category": "Phones & accessories"
   },
   { "id": 5,
-    "img": "",
-    "category": "Category 5"
+    "img": "https://miro.medium.com/max/1400/1*S81O15rjKfG-BFdnNC6-GQ.jpeg",
+    "category": "Books & study materail"
   },
   { "id": 6,
-    "img": "",
-    "category": "Category 6"
+    "img": "https://www.ikea.com/my/en/images/products/lillabo-toy-car__0175385_PE328763_S5.JPG",
+    "category": "Automobile & accessories"
   },
   { "id": 7,
-    "img": "",
-    "category": "Category 7"
+    "img": "https://baltimorefitnessforwomen.com/wp-content/uploads/2017/10/Clipart-Sports-Equipment-08.jpg",
+    "category": "Sports accessories"
   },
   { "id": 8,
-    "img": "",
-    "category": "Category 8"
+    "img": "https://atlas-content-cdn.pixelsquid.com/stock-images/metro-card-RJEZMZD-600.jpg",
+    "category": "Travel pass"
+  },
+  { "id": 9,
+    "img": "https://images-na.ssl-images-amazon.com/images/I/51GmjUF1IDL._AC_SL1264_.jpg",
+    "category": "Electronics"
+  },
+  { "id": 10,
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSq7bq-BLAgIiOqytBQLziQHS-rZgHq0TfMu3_FAWT3SwtaqqiQ&usqp=CAU",
+    "category": "Personal accessories"
   }
 ]
