@@ -1,25 +1,30 @@
 [
-  { "img": "https://www.ikea.com/us/en/images/products/havsten-2-seat-sofa-in-outdoor__0668266_PE714335_S5.JPG?f=l",
+  { "id": 1,
+    "img": "https://www.ikea.com/us/en/images/products/havsten-2-seat-sofa-in-outdoor__0668266_PE714335_S5.JPG?f=l",
     "title": "Sofa",
     "description":  "Bought 2 years back from Ikea. Beige color, perfect for relaxing. Looks new, no stains and in perfect condition for re use",
     "price": 100
   },
-  { "img": "https://www.ikea.com/us/en/images/products/bleckberget-swivel-chair__0741415_PE742366_S5.JPG?f=l",
+  { "id": 2,
+    "img": "https://www.ikea.com/us/en/images/products/bleckberget-swivel-chair__0741415_PE742366_S5.JPG",
     "title": "Swivel Chair",
     "description":  "Dark red swivel chair good for studying for long hours.",
     "price": 25
   },
-  {"img": "https://images-na.ssl-images-amazon.com/images/I/91oiSVwU7OL._AC_SL1500_.jpg",
+  { "id": 3,
+    "img": "https://images-na.ssl-images-amazon.com/images/I/91oiSVwU7OL._AC_SL1500_.jpg",
     "title": "Electric Kettle",
     "description":  "Stainless Steel Portable Electric Hot Water Kettle - 1 Liter, Silver.",
     "price": 10
   },
-  { "img": "https://m.media-amazon.com/images/I/410xQKu2cUL.jpg",
+  { "id": 4,
+    "img": "https://m.media-amazon.com/images/I/410xQKu2cUL.jpg",
     "title": "Cloud Computing by Nayan Ruparelia",
     "description":  "No marks, almost like new.",
     "price": 5
   },
-  {"img": "https://images-na.ssl-images-amazon.com/images/I/61FF3wtSgwL._AC_SL1500_.jpg",
+  { "id": 5,
+    "img": "https://images-na.ssl-images-amazon.com/images/I/61FF3wtSgwL._AC_SL1500_.jpg",
     "title": "Electric Kick Scooter",
     "description":  "Used a year Segway Ninebot ES1 Gen2 Electric Kick Scooter, Lightweight and Foldable, Dark Grey",
     "price": 275

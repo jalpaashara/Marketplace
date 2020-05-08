@@ -1,7 +1,9 @@
 <div class="grid-container">
-<app-navbar  class="app-nav"></app-navbar>
+  <app-navbar  class="app-nav"></app-navbar>
   <div class="wrapper">
+    <div *ngIf="userDetails!=undefined" style="margin: 10px 0px 20px 0px;padding-left: 30px"><h3>Welcome {{userDetails.firstName}},</h3></div>
     <div class="grid-row">
+
       <div class="row1">
         <h5>Recently Viewed</h5>
       </div>
@@ -12,7 +14,7 @@
             <h6 class="card-title h6-font">{{r.title}}</h6>
             <span class="card-text h6-font">Price: ${{r.price}} </span>
           </div>
-          <button routerLink="/dashboard" class="btn btn-danger">Click to know more</button>
+          <button routerLink="/product/{{r.id}}" class="btn btn-danger">Click to know more</button>
         </div>
       </div>
     </div>
@@ -40,7 +42,7 @@
       <div class="row-cat">
         <div *ngFor="let cat of categories">
           <img class="cat-img" src="{{cat.img}}"><br>
-          <h5 class="card-title">{{cat.category}}</h5>
+          <h5 class="card-title">{{cat.name}}</h5>
         </div>
       </div>
     </div>

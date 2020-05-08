@@ -8,6 +8,7 @@ import {HomeComponent} from './components/home/home.component';
 import {AboutComponent} from './components/about/about.component';
 import {MyAccountComponent} from './components/myaccount/my-account.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {ProductComponent} from './components/product/product/product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'verify-email-address', component: VerifyEmailComponent},
   {path: 'about', component: AboutComponent},
   {path: 'myaccount', component: MyAccountComponent},
-  {path: 'forgot-password', component: ForgotPasswordComponent}];
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'product/:id', component: ProductComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

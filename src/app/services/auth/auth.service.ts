@@ -4,6 +4,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {UserDetails} from '../../models/user-details';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +25,10 @@ export class AuthService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router  ) {
     this.userData = afAuth.authState;
+    console.log(this.userData);
   }
 
   isSetUserSession(): boolean {
-    console.log('isSetUserSession ' + !!localStorage.getItem('user'));
     return !!localStorage.getItem('user');
   }
 
@@ -55,21 +56,23 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
         .then(res => {
-          this.SendVerificationMail();
-          this.SetUserData(res.user);
+          this.SendVerificationMail()
+            .then(
+              verRes => {
+                this.router.navigate(['verify-email-address']);
+                },
+              err => console.log(err.message));
+          this.SetUserData(res.user).then(resp => {console.log('Set User data ', resp); }, errr => console.log(errr.message));
           resolve(res);
         }, err => reject(err));
     });
   }
-  // Send email verfificaiton when new user sign up
+  // Send email verification when new user sign up
   SendVerificationMail() {
-    return this.afAuth.auth.currentUser.sendEmailVerification()
-      .then(() => {
-        this.router.navigate(['verify-email-address']);
-      });
+    return this.afAuth.auth.currentUser.sendEmailVerification();
   }
 
-  // Reset Forggot password
+  // Reset Forgot password
   ForgotPassword(passwordResetEmail) {
     return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
@@ -90,16 +93,13 @@ export class AuthService {
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
     SetUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    console.log(userRef);
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      // firstName: user.firstName,
-      // lastName: user.lastName,
       emailVerified: user.emailVerified
     };
-    return userRef.set( Object.assign({}, userData), {
-      merge: true
-    });
+    return userRef.set( userData, {merge: true});
   }
 
   // Sign out
@@ -112,10 +112,5 @@ export class AuthService {
           resolve(res);
         }, err => reject(err));
       });
-
-    /*return this.afAuth.auth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['home']);
-    });*/
   }
 }

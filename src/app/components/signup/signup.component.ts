@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-
+import {UserAccountService} from '../../services/user/user-account.service';
+import {UserDetails} from '../../models/user-details';
 
 @Component({
   selector: 'app-signup',
@@ -15,13 +16,16 @@ export class SignupComponent implements OnInit {
   loading = false;
   successMessage: string;
   errorMessage: string;
+  userDetails: UserDetails; // Save logged in user data
 
   // convenience getter for easy access to form fields
   get formVal() { return this.registerForm.controls; }
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private registerService: AuthService) { }
+              private registerService: AuthService,
+              private userAccountService: UserAccountService) {
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -35,8 +39,6 @@ export class SignupComponent implements OnInit {
         ]],
       confirmPassword: ['', Validators.required]
     }, {validators: this.checkPasswordMatch('password', 'confirmPassword')});
-
-    // console.log(this.registerForm.controls.confirmPassword);
   }
 
   private checkPasswordMatch(passwordKey: string, passwordConfirmationKey: string) {
@@ -80,14 +82,23 @@ export class SignupComponent implements OnInit {
       console.log('Invalid: ', this.registerForm.invalid, ' ', this.registerForm.errors);
       return;
     }
+    this.userDetails.firstName = this.registerForm.value.firstName;
+    this.userDetails.lastName = this.registerForm.value.lastName;
+    this.userDetails.email = this.registerForm.value.email;
 
     this.registerService.SignUp(this.registerForm.value.email, this.registerForm.value.password)
-      .then(res => {
-        console.log(res);
+      .then(() => {
         this.errorMessage = '';
         this.successMessage = 'Your account has been created';
+        this.userAccountService.setUserDetails(this.userDetails)
+          .subscribe(res => {
+            this.userDetails.id = res[0].id;
+            console.log('res ', res);
+            console.log('userDetails ', this.userDetails);
+          }, error => {
+            console.log(error.message);
+          });
       }, err => {
-        console.log(err);
         this.errorMessage = err.message;
         this.successMessage = '';
       });

@@ -1,0 +1,73 @@
+<div class="main">
+  <div>
+    <app-navbar></app-navbar>
+  </div>
+
+  <div class="row">
+    <div class="container-fluid" >
+      <br>
+      <div class="row">
+        <!-- Left Column for Image -->
+        <div class="col-sm-6">
+
+          <div class="row-cols-1" style="margin-bottom: 20px" #bigpicture>
+              <img data-image="1" class="left-col-img"
+                   src="https://images-na.ssl-images-amazon.com/images/I/61FF3wtSgwL._AC_SL1500_.jpg" alt=""
+                   style="width:70%;padding-left: 70px" #currImage>
+          </div>
+
+          <div class="row text-center" style="margin:30px" #thumbnails>
+            <div class="col text-center" style="border-style: solid;border-color: darkgrey;width:50px;height:60px;margin-left:10px">
+                  <img data-image="1" src="https://images-na.ssl-images-amazon.com/images/I/61FF3wtSgwL._AC_SL1500_.jpg" alt=""
+                       style="width:60px;height:50px;"
+                       (click)="showImage()">
+            </div>
+
+            <div class="col text-center" style="border-style: solid;border-color: darkgrey;width:50px;height:60px;margin-left:10px">
+
+                  <img data-image="1"
+                       src="https://www.ikea.com/us/en/images/products/bleckberget-swivel-chair__0741415_PE742366_S5.jpg" alt=""
+                       style="width:60px;height:50px;padding-left:20px"
+                       (click)="showImage()">
+            </div>
+
+            <div class="col text-center" style="border-style: solid;border-color: darkgrey;width:50px;height:60px;margin-left:10px">
+                  <img data-image="1"
+                       src="https://images-na.ssl-images-amazon.com/images/I/91oiSVwU7OL._AC_SL1500_.jpg" alt=""
+                       style="width:60px;height:50px;padding-left:20px"
+                       (click)="showImage()">
+            </div>
+          </div>
+          <img [src]='img'/>
+        </div>
+
+
+
+        <!-- Right Column -->
+        <div class="col-sm-6">
+
+          <!-- Product Description -->
+          <div class="product-description">
+            <span>Headphones</span><br>
+            <h5>{{productData.name}}</h5>
+
+            <!-- Product Pricing -->
+            <div class="product-price">
+              <span>${{productData.price}}</span>
+            </div>
+            <br>
+            <span style="color:black; ">Description:</span>
+            <p>{{productData.description}}</p>
+          </div>
+
+          <button class="btn btn-warning">Click to contact the seller</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row-cols-1">
+    <footer class="foot">&copy; JAMMR 2020</footer>
+  </div>
+</div>

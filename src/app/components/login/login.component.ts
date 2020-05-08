@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserDetails} from '../../models/user-details';
+import {UserAccountService} from '../../services/user/user-account.service';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +15,17 @@ export class LoginComponent implements OnInit {
   submitted = false;
   loading = false;
   errorMessage: string;
+  userDetails: UserDetails;
 
   get formVal() { return this.loginForm.controls; }
 
   constructor(
     public authService: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) { }
+    private router: Router,
+    private userAccountService: UserAccountService
+  ) {
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -37,8 +41,23 @@ export class LoginComponent implements OnInit {
       return;
     }
     return this.authService.SignIn(this.loginForm.value.email, this.loginForm.value.password)
-      .then(res => {
+      .then(() => {
         this.errorMessage = '';
+        this.userAccountService.getUserWithEmail(this.loginForm.value.email)
+          .subscribe(
+            (usr) => {
+                  this.userDetails = {
+                    id: usr[0].id,
+                    email: usr[0].email,
+                    firstName: usr[0].firstName,
+                    lastName: usr[0].lastName,
+                    phone: usr[0].phone
+                  };
+                  console.log('res ', usr);
+                  this.userAccountService.setCurrUserDetails(this.userDetails);
+                }, error => {
+                  console.log(error.message);
+                });
       }, err => {
         console.log(err.message);
         this.errorMessage = err.message;

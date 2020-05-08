@@ -17,12 +17,14 @@ import {AuthService} from './services/auth/auth.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './components/home/home.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AboutComponent } from './components/about/about.component';
 import { MyAccountComponent } from './components/myaccount/my-account.component';
 import { SellProductComponent } from './components/sell-product/sell-product.component';
 import {DashboardService} from './services/dashboard/dashboard.service';
 import {HttpClientModule} from '@angular/common/http';
+import {UserAccountService} from './services/user/user-account.service';
+import { ProductComponent } from './components/product/product/product.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import {HttpClientModule} from '@angular/common/http';
     HomeComponent,
     AboutComponent,
     MyAccountComponent,
-    SellProductComponent
+    SellProductComponent,
+    ProductComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -47,9 +50,10 @@ import {HttpClientModule} from '@angular/common/http';
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModalModule
+    NgbModalModule,
+    FormsModule
   ],
-  providers: [AuthService, DashboardService],
+  providers: [AuthService, DashboardService, UserAccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
