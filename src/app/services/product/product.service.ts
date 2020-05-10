@@ -16,15 +16,24 @@ export class ProductService {
     return this.http.post(url, product);
   }
 
+  setProductImage(prodId, picture) {
+    const url = this.url + '/product' + '/' + prodId + '/image';
+    return this.http.post(url, picture);
+  }
+
   getProductById(prodId) {
     const url = this.url + '/product' + '/' + prodId;
     return this.http.get(url);
   }
 
-  getProductImage(prodId) {
-    const url = this.url + '/product' + '/' + prodId + '/image';
-    console.log("image url: ", url);
+  getProdAllImagesId(prodId) {
+    const url = this.url + '/product' + '/' + prodId + '/allImages';
     return this.http.get(url);
+  }
 
+  getProductImage(imageId) {
+    const url = this.url + '/image' + '/' + imageId;
+    console.log('image url: ', url);
+    return this.http.get(url, { responseType: 'blob' });
   }
 }

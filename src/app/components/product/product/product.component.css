@@ -12,6 +12,7 @@
 .product-description {
   /*border-bottom: 1px solid #E1E8EE;*/
   margin-bottom: 50px;
+  margin-right:70px;
 }
 .product-description span {
   font-size: 13px;
@@ -55,9 +56,15 @@
   margin-right: 20px;
 }
 
+.left-col-img{
+  width:70%;
+  padding-left: 70px;
+  height:400px
+}
 
-@media (max-width: 535px) {
-  .container-fluid, .row{
+
+@media screen and (max-width: 600px) {
+  .container-fluid{
     display: block;
   }
   .left-col img {

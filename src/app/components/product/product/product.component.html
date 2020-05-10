@@ -3,48 +3,34 @@
     <app-navbar></app-navbar>
   </div>
 
-  <div class="row">
+  <div>
     <div class="container-fluid" >
       <br>
       <div class="row">
         <!-- Left Column for Image -->
-        <div class="col-sm-6">
+        <div class="col-sm-5">
 
-          <div class="row-cols-1" style="margin-bottom: 20px" #bigpicture>
+          <div class="row" style="margin-bottom: 30px" #bigpicture>
               <img data-image="1" class="left-col-img"
-                   src="https://images-na.ssl-images-amazon.com/images/I/61FF3wtSgwL._AC_SL1500_.jpg" alt=""
-                   style="width:70%;padding-left: 70px" #currImage>
+                   [src]="currImg" alt="" #currImage>
           </div>
 
-          <div class="row text-center" style="margin:30px" #thumbnails>
-            <div class="col text-center" style="border-style: solid;border-color: darkgrey;width:50px;height:60px;margin-left:10px">
-                  <img data-image="1" src="https://images-na.ssl-images-amazon.com/images/I/61FF3wtSgwL._AC_SL1500_.jpg" alt=""
-                       style="width:60px;height:50px;"
-                       (click)="showImage()">
+          <div class="row text-center" #thumbnails>
+            <div class="col-sm-1 text-center" style="height:80px;margin:20px;padding:0"
+                 *ngFor="let i of img">
+                  <img data-image="1" [src]="i" alt="" class="text-center"
+                       style="width:75px;height:75px;margin: 0;border-style: solid;border-color: #86989B"
+                       (click)="showImage(i)">
             </div>
 
-            <div class="col text-center" style="border-style: solid;border-color: darkgrey;width:50px;height:60px;margin-left:10px">
-
-                  <img data-image="1"
-                       src="https://www.ikea.com/us/en/images/products/bleckberget-swivel-chair__0741415_PE742366_S5.jpg" alt=""
-                       style="width:60px;height:50px;padding-left:20px"
-                       (click)="showImage()">
-            </div>
-
-            <div class="col text-center" style="border-style: solid;border-color: darkgrey;width:50px;height:60px;margin-left:10px">
-                  <img data-image="1"
-                       src="https://images-na.ssl-images-amazon.com/images/I/91oiSVwU7OL._AC_SL1500_.jpg" alt=""
-                       style="width:60px;height:50px;padding-left:20px"
-                       (click)="showImage()">
-            </div>
           </div>
-          <img [src]='img'/>
+
         </div>
 
 
 
         <!-- Right Column -->
-        <div class="col-sm-6">
+        <div class="col-sm-7">
 
           <!-- Product Description -->
           <div class="product-description">

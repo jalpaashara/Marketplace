@@ -72,6 +72,17 @@ export class AuthService {
     return this.afAuth.auth.currentUser.sendEmailVerification();
   }
 
+  ChangePassword(newPassword) {
+    return this.afAuth.user.subscribe(res =>
+    res.updatePassword(newPassword).then(
+      () => {
+        window.alert('Password succesfully changed.');
+      }).catch((error) => {
+        window.alert(error);
+      }
+    ));
+  }
+
   // Reset Forgot password
   ForgotPassword(passwordResetEmail) {
     return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)

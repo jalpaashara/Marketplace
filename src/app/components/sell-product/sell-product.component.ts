@@ -16,6 +16,11 @@ export class SellProductComponent implements OnInit {
   sellProductForm: FormGroup;
   categories;
   private userDetails: UserDetails;
+  submitted = false;
+  pictures: FileList;
+  prodId;
+
+  get formVal() { return this.sellProductForm.controls; }
 
   constructor(public dashboardService: DashboardService,
               private formBuilder: FormBuilder,
@@ -28,9 +33,12 @@ export class SellProductComponent implements OnInit {
     this.sellProductForm = this.formBuilder.group({
       category: ['', Validators.required],
       prodName: ['', Validators.required],
-      prodDesc: [''],
-      prodPrice: ['']
+      prodDesc: ['', Validators.required],
+      prodPrice: ['', Validators.required],
+      prodImages: ['', [Validators.required]]
     });
+
+
 
     this.getCategories();
 
@@ -60,8 +68,13 @@ export class SellProductComponent implements OnInit {
 
   onSubmit() {
     console.log(this.createProductData());
+    this.submitted = true;
+    if (this.sellProductForm.invalid) {
+      console.log('Invalid: ', this.sellProductForm.invalid, ' ', this.formVal, ' ', this.sellProductForm.value);
+      return;
+    }
     this.setProduct(this.createProductData());
-    this.modal.dismiss('Add Listing click');
+    this.modal.dismiss(this.router.navigateByUrl('product/' + this.prodId));
   }
 
   getCategories() {
@@ -71,7 +84,26 @@ export class SellProductComponent implements OnInit {
   }
 
   private setProduct(productData) {
-    this.productService.setProductDetails(productData).subscribe((res) => {console.log(res); }, err => console.log(err));
+    this.productService.setProductDetails(productData)
+      .subscribe(
+        (res) => {
+              console.log(res);
+              this.prodId = res;
+              console.log(this.pictures);
+              console.log(this.prodId.prodId);
+              for (let i = 0; i < this.pictures.length; i++) {
+                console.log(this.pictures[i].name);
+                this.setPictures(this.pictures[i]);
+              }
+          }, err => console.log(err));
 
+  }
+
+  setPictures(img) {
+    const formData = new FormData();
+    formData.append('file', img);
+    console.log(formData);
+    this.productService.setProductImage(this.prodId.prodId, formData)
+      .subscribe(res => {console.log(res); }, error => console.log(error));
   }
 }

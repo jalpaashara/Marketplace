@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
   loading = false;
   successMessage: string;
   errorMessage: string;
-  userDetails: UserDetails; // Save logged in user data
+  userDetails: UserDetails = new UserDetails(); // Save logged in user data
 
   // convenience getter for easy access to form fields
   get formVal() { return this.registerForm.controls; }
@@ -82,9 +82,11 @@ export class SignupComponent implements OnInit {
       console.log('Invalid: ', this.registerForm.invalid, ' ', this.registerForm.errors);
       return;
     }
+    console.log(this.registerForm.value.firstName);
     this.userDetails.firstName = this.registerForm.value.firstName;
     this.userDetails.lastName = this.registerForm.value.lastName;
     this.userDetails.email = this.registerForm.value.email;
+    this.userDetails.phone = '';
 
     this.registerService.SignUp(this.registerForm.value.email, this.registerForm.value.password)
       .then(() => {
