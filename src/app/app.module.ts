@@ -25,6 +25,7 @@ import {DashboardService} from './services/dashboard/dashboard.service';
 import {HttpClientModule} from '@angular/common/http';
 import {UserAccountService} from './services/user/user-account.service';
 import { ProductComponent } from './components/product/product/product.component';
+import {ChangePasswordComponent} from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ProductComponent } from './components/product/product/product.component
     AboutComponent,
     MyAccountComponent,
     SellProductComponent,
-    ProductComponent
+    ProductComponent,
+    ChangePasswordComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

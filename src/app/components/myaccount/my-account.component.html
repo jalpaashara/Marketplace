@@ -29,13 +29,26 @@
           <h1 class="h2">User Profile</h1>
         </div>
         <!-- Show user data when logged in -->
-        <div class="row" *ngIf="userData as user">
+        <div class="row" >
           <div class="col-md-12">
             <div class="media">
               <div class="media-body">
-                <h1>Hello: <strong>{{(user.email) ? ((user.email).substring(0,(user.email).indexOf('@'))).charAt(0).toUpperCase()+
-                    ((user.email).substring(0,(user.email).indexOf('@'))).slice(1): 'User'}}</strong></h1>
-                <p>Email: <strong>{{user.email}}</strong></p>
+                <h1>Hello: {{userDetails.firstName}}</h1>
+                <p>Email: <strong>{{userDetails.email}}</strong></p>
+                <p>
+                  <a routerLink="/change-password">Change Password</a>
+                </p>
+
+                <h5>Contatct Information</h5>
+                <div><b>FirstName</b>:&nbsp;{{userDetails.firstName}}&nbsp;&nbsp;
+                  <button class="btn btn-outline-danger">Edit</button>
+                </div><br>
+                <div><b>LastName</b>:&nbsp;{{userDetails.lastName}}&nbsp;&nbsp;
+                  <a routerLink=#>Edit</a>
+                </div><br>
+                <div><b>Phone</b>:&nbsp;<span *ngIf="userDetails.phone==' '">Not Available</span>
+                  {{userDetails.phone}}&nbsp;&nbsp;
+                  <button class="btn btn-outline-danger">Edit</button></div>
               </div>
             </div>
           </div>
