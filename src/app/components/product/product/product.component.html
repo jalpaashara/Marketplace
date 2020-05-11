@@ -22,19 +22,15 @@
                        style="width:75px;height:75px;margin: 0;border-style: solid;border-color: #86989B"
                        (click)="showImage(i)">
             </div>
-
           </div>
-
         </div>
-
-
 
         <!-- Right Column -->
         <div class="col-sm-7">
 
           <!-- Product Description -->
           <div class="product-description">
-            <span>Headphones</span><br>
+            <span>{{productData.categoryName}}</span><br>
             <h5>{{productData.name}}</h5>
 
             <!-- Product Pricing -->
@@ -54,7 +50,6 @@
           </ng-template>
         </div>
       </div>
-
     </div>
   </div>
 

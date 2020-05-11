@@ -63,6 +63,13 @@ export class ProductComponent implements OnInit {
       .subscribe((res) => {
         console.log(res[0]);
         this.productData = res[0];
+        this.prodService.getCategoryById(this.productData.categoryId)
+          .subscribe((cat) => {
+            const c = cat;
+            this.productData.categoryName = c['name'];
+            console.log(this.productData.categoryName);
+
+          });
         if (this.productData === undefined) {
           this.router.navigateByUrl('dashboard');
         }
@@ -75,7 +82,6 @@ export class ProductComponent implements OnInit {
       .subscribe(
         res => {
         this.imageIds = res.images;
-        console.log(typeof this.imageIds.imageIds);
         const image = this.imageIds.imageIds;
         for (const i of image) {
           this.img.push(environment.api + '/image' + '/' + i);

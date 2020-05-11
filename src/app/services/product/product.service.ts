@@ -19,6 +19,11 @@ export class ProductService {
     return this.http.get(url);
   }
 
+  getCategoryById(catId) {
+    const url = this.url + '/categories/' + catId;
+    return this.http.get(url);
+  }
+
   setProductDetails(product) {
     const url = this.url + '/products';
     return this.http.post(url, product);

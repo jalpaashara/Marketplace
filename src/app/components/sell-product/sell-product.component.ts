@@ -6,6 +6,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {UserAccountService} from '../../services/user/user-account.service';
 import {UserDetails} from '../../models/user-details';
 import {ProductService} from '../../services/product/product.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-sell-product',
@@ -27,7 +28,8 @@ export class SellProductComponent implements OnInit {
               public router: Router,
               public modal: NgbActiveModal,
               private userAccountService: UserAccountService,
-              private productService: ProductService) { }
+              private productService: ProductService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.sellProductForm = this.formBuilder.group({
@@ -74,7 +76,11 @@ export class SellProductComponent implements OnInit {
       return;
     }
     this.setProduct(this.createProductData());
-    this.modal.dismiss(this.router.navigateByUrl('product/' + this.prodId));
+    this.toastr.success('Product successfully listed.');
+    this.modal.dismiss('Add Listing Click');
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['dashboard']);
   }
 
   getCategories() {
@@ -95,7 +101,7 @@ export class SellProductComponent implements OnInit {
                 console.log(this.pictures[i].name);
                 this.setPictures(this.pictures[i]);
               }
-          }, err => console.log(err));
+        }, err => console.log(err));
 
   }
 
