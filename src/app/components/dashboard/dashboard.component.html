@@ -1,43 +1,27 @@
 <div class="grid-container">
   <app-navbar  class="app-nav"></app-navbar>
   <div class="wrapper">
-    <div *ngIf="userDetails!=undefined" style="margin: 10px 0px 20px 0px;padding-left: 30px"><h3>Welcome {{userDetails.firstName}},</h3></div>
-    <div class="grid-row">
+    <div *ngIf="userDetails!=undefined" class="welcome"><h3>Welcome {{userDetails.firstName}},</h3></div>
 
+    <div class="grid-row">
       <div class="row1">
-        <h5>Recently Viewed</h5>
+        <!--<h5>Recently Added</h5>-->
       </div>
       <div class="row2">
-        <div class="card" style="width: 14rem; height: 15rem" *ngFor="let r of recent">
+        <div class="card" style="width: 14rem; height: 15rem" *ngFor="let r of product">
           <div class="card-body">
-            <img src="{{r.img}}" style="width: 100px; height: 100px; padding-bottom: 5px; margin-bottom: 5px">
-            <h6 class="card-title h6-font">{{r.title}}</h6>
-            <span class="card-text h6-font">Price: ${{r.price}} </span>
+            <img src="{{url+r.imageIds[0]}}" style="width: 100px; height: 100px; padding-bottom: 5px; margin-bottom: 5px">
+            <h6 class="card-title h6-font">{{r.prodName}}</h6>
+            <span class="card-text h6-font">Price: ${{r.prodPrice}} </span>
           </div>
-          <button routerLink="/product/{{r.id}}" class="btn btn-danger">Click to know more</button>
+          <button routerLink="/product/{{r.prodId}}" class="btn btn-danger">Click to know more</button>
         </div>
       </div>
     </div>
 
-    <div class="grid-row">
-      <div class="row1">
-        <h5>Most Viewed</h5>
-      </div>
-      <div class="row2">
-        <div class="card" style="width: 14rem; height: 15rem" *ngFor="let r of recent">
-          <div class="card-body">
-            <img src="{{r.img}}" style="width: 100px; height: 100px; padding-bottom: 5px; margin-bottom: 5px">
-            <h6 class="card-title h6-font">{{r.title}}</h6>
-            <p class="card-text h6-font">Price: ${{r.price}} </p>
-          </div>
-          <button routerLink="/dashboard" class="btn btn-danger">Click to know more</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid-row2">
-      <div class="row1 text-lg-center">
-        <h4 style="font-family: Snell Roundhand, cursive; letter-spacing: 3px">Shop By Category</h4>
+   <!-- <div class="grid-row2">
+      <div class="row1 text-md-center">
+        <h4 style="font-family: Snell Roundhand, cursive; letter-spacing: 3px">Look By Category</h4>
       </div>
       <div class="row-cat">
         <div *ngFor="let cat of categories">
@@ -45,7 +29,7 @@
           <h5 class="card-title">{{cat.name}}</h5>
         </div>
       </div>
-    </div>
+    </div>-->
 
 
   </div>

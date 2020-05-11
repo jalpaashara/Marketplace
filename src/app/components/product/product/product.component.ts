@@ -7,6 +7,9 @@ import {map} from 'rxjs/operators';
 import {async} from 'rxjs/internal/scheduler/async';
 import {environment} from '../../../../environments/environment';
 import {AuthService} from '../../../services/auth/auth.service';
+import {UserAccountService} from '../../../services/user/user-account.service';
+import {UserDetails} from '../../../models/user-details';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-product',
@@ -20,11 +23,14 @@ export class ProductComponent implements OnInit {
   private imageIds;
   currImg: any;
   private isLoggedIn: boolean;
+  public userDetails: UserDetails;
 
   constructor(public authService: AuthService,
               public route: ActivatedRoute,
               private prodService: ProductService,
-              public router: Router) { }
+              public router: Router,
+              public userAccountService: UserAccountService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.authService.isLoggedIn.subscribe((res) => {
@@ -34,6 +40,19 @@ export class ProductComponent implements OnInit {
       this.productID = this.route.snapshot.params.id;
       this.getProductById();
       this.getProductImage();
+
+      if (this.userAccountService.getCurrUserDetails() !== undefined) {
+        console.log(this.userAccountService.getCurrUserDetails());
+        this.userDetails = this.userAccountService.getCurrUserDetails();
+      } else {
+        this.userAccountService.currUser
+          .subscribe(
+            (usr) => {
+              console.log(usr);
+              this.userDetails = usr;
+            },
+            error => {console.log(error); });
+      }
     } else {
       this.router.navigateByUrl('home');
     }
@@ -50,25 +69,13 @@ export class ProductComponent implements OnInit {
       });
   }
 
-  /*getProductImage() {
-    this.prodService.getProductImage(this.productID)
-      .subscribe(res => {
-        console.log(res[0].image);
-        const objectURL = 'data:image/jpeg;base64,' + res[0].image;
-
-        this.img = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        console.log(this.img);
-      });
-  }*/
-
-  getProductImage() {
+ getProductImage() {
     this.prodService.getProdAllImagesId(this.productID)
       // this.imageIds = ;
       .subscribe(
         res => {
-        console.log(res);
-        this.imageIds = res;
-        console.log(this.imageIds.imageIds);
+        this.imageIds = res.images;
+        console.log(typeof this.imageIds.imageIds);
         const image = this.imageIds.imageIds;
         for (const i of image) {
           this.img.push(environment.api + '/image' + '/' + i);
@@ -83,5 +90,19 @@ export class ProductComponent implements OnInit {
 
   showImage(url) {
     this.currImg = url;
+  }
+
+  removeProduct() {
+    this.prodService.removeProduct(this.productID)
+      .subscribe(() => {
+        this.router.navigate(['dashboard']);
+        this.toastr.success('Product successfully deleted.');
+      }, (error) => {
+      this.toastr.error('Could not delete. Please try after sometime', error);
+    });
+  }
+
+  sendEmailToSeller() {
+
   }
 }

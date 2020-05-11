@@ -26,6 +26,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {UserAccountService} from './services/user/user-account.service';
 import { ProductComponent } from './components/product/product/product.component';
 import {ChangePasswordComponent} from './components/change-password/change-password.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastContainerModule, ToastrModule} from 'ngx-toastr';
+import {AngularFireFunctionsModule} from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import {ChangePasswordComponent} from './components/change-password/change-passw
     ReactiveFormsModule,
     HttpClientModule,
     NgbModalModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
+    ToastContainerModule
   ],
   providers: [AuthService, DashboardService, UserAccountService],
   bootstrap: [AppComponent]

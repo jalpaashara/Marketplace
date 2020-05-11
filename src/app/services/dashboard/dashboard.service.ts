@@ -10,10 +10,6 @@ export class DashboardService {
 
   constructor(public http: HttpClient) { }
 
-  getRecentViews() {
-    return this.http.get('assets/recentlyviewed.json');
-  }
-
   getCategories() {
     // return this.http.get('assets/categories.json');
     const url = this.url + '/categories';

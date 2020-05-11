@@ -5,6 +5,11 @@ import {DashboardService} from '../../services/dashboard/dashboard.service';
 import {Router} from '@angular/router';
 import {UserDetails} from '../../models/user-details';
 import {UserAccountService} from '../../services/user/user-account.service';
+import {Product} from '../../models/product';
+import {ProductService} from '../../services/product/product.service';
+import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,10 +22,14 @@ export class DashboardComponent implements OnInit {
   categories: any;
   private isLoggedIn: boolean;
   userDetails: UserDetails;
+  product: Product[] = [];
+
+
+  url = environment.api + '/image/';
   constructor(public authService: AuthService,
-              public dashboardService: DashboardService,
               public router: Router,
-              public userAccountService: UserAccountService) {
+              public userAccountService: UserAccountService,
+              private productService: ProductService) {
   }
 
   ngOnInit() {
@@ -41,28 +50,51 @@ export class DashboardComponent implements OnInit {
       this.userAccountService.currUser
         .subscribe(
           (usr) => {
-            console.log(usr);
             this.userDetails = usr;
           },
           error => {console.log(error); });
     }
-
-    this.getRecentViews();
+    this.getAllProducts();
     this.getCategories();
     } else {
       this.router.navigateByUrl('home');
     }
   }
 
-  getRecentViews() {
-    this.dashboardService.getRecentViews().subscribe(res => {
-      console.log(res); this.recent = res; });
+  getCategories() {
+    this.productService.getCategories().subscribe(res => {
+      this.categories = res;
+      // console.log(res);
+    });
   }
 
-  getCategories() {
-    this.dashboardService.getCategories().subscribe(res => {
-      this.categories = res;
-      console.log(res);
-    });
+  getAllProducts() {
+    this.productService.getAllProducts()
+      .subscribe(async (res) => {
+          // console.log(res);
+          const p = res;
+          for (const prod of p.products) {
+            // tslint:disable-next-line:one-variable-per-declaration prefer-const
+            let imgIds: number[] = [], temp, i = -1;
+            this.productService.getProdAllImagesId(prod.id)
+              .pipe(map(im => im.images.imageIds))
+              .subscribe((imgs) => {
+                temp = imgs;
+                for (const y of temp) {
+                    imgIds.push(y);
+                  }
+              });
+            this.product.push({
+              categoryId: prod.categoryId,
+              days: prod.days,
+              prodDesc: prod.description,
+              prodId: prod.id,
+              prodName: prod.name,
+              prodPrice: prod.price,
+              userId: prod.userId,
+              imageIds: imgIds
+            });
+          }
+        });
   }
 }

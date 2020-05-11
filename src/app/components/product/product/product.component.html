@@ -46,7 +46,12 @@
             <p>{{productData.description}}</p>
           </div>
 
-          <button class="btn btn-warning">Click to contact the seller</button>
+          <div *ngIf="userDetails.id==productData.userId; else elseTemplate">
+            <button class="btn btn-danger" (click)="removeProduct()">Delete</button>
+          </div>
+          <ng-template #elseTemplate>
+            <button class="btn btn-warning" (click)="sendEmailToSeller()">Click to contact the seller</button>
+          </ng-template>
         </div>
       </div>
 

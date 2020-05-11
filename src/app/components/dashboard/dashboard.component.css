@@ -20,22 +20,38 @@
   /*min-width: 1450px;*/
 }
 
+/*.wrapper{
+  grid-area: wrapper;
+  !*min-width: 1450px;*!
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 4% 59% 37%;
+  !*margin-top: 50px;*!
+  background-color: #f7f7f9;
+  overflow: hidden;
+}*/
+
 .wrapper{
   grid-area: wrapper;
   /*min-width: 1450px;*/
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2% 31% 31% 36%;
+  grid-template-rows: 4% 96%;
   /*margin-top: 50px;*/
   background-color: #f7f7f9;
   overflow: hidden;
 }
 
+.welcome{
+  margin: 20px 0px 25px 0px;
+  padding-left: 30px
+}
+
 .grid-row{
-  margin: 30px;
+  margin: 25px 30px 25px 30px;
   display: grid;
   /*grid-template-columns: 1fr;*/
-  grid-template-rows: 18% 82%;
+  grid-template-rows: 20px 1fr;
   /*border-style: solid;*/
   /*border-color: #041e42;*/
   box-shadow: 10px 10px 5px 0px #f7f7f9;
@@ -44,11 +60,11 @@
 }
 
 .row1{
-  padding: 20px 10px 10px 30px;
+  padding: 20px 10px 15px 30px;
 }
 
 .grid-row2{
-  margin: 10px 30px 30px 30px;
+  margin: 0px 30px 10px 30px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 0.30fr 1.5fr;
@@ -62,6 +78,7 @@
   margin-top: 0px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2,1fr);
   grid-gap: 20px;
 }
 
@@ -85,19 +102,32 @@
 }
 
 @media screen and (max-width: 550px) {
+  .grid-container {
+    display: grid;
+    grid-template-areas: "header" "wrapper" "footer";
+    grid-template-rows: 60px 1fr 60px;
+    grid-template-columns: 1fr;
+    /*height: 100vh;*/
+    overflow: hidden;
+  }
+
   .wrapper{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    margin-top: 50px;
+    grid-template-rows: 60px 1fr;
     background-color: #f7f7f9;
+  }
+
+  .welcome{
+    margin-top: 20px;
+    padding-left: 10px;
   }
 
   .grid-row{
     margin: 10px 0px 0px 0px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.15fr 2fr;
+    grid-template-rows: 1fr;
     /*border-style: solid;*/
     /*border-color: #041e42;*/
     box-shadow: 10px 10px 5px 0px #f7f7f9;
@@ -116,6 +146,7 @@
     padding-right: 30px;
     padding-bottom: 30px;
     display: grid;
+    margin-top: 10px;
     grid-template-columns: repeat(1, 1fr);
     /*grid-gap: 5px;*/
   }
@@ -131,7 +162,7 @@
   }*/
 
   .row1{
-    padding: 30px 0px 0px 30px;
+    padding: 0px 0px 0px 0px;
   }
 
 }
