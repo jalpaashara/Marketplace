@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserDetails} from '../../models/user-details';
 import {environment} from '../../../environments/environment';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,6 @@ export class UserAccountService {
       phone: ' '
     };*/
     const url = environment.api + '/user';
-    console.log('Mysql', user, ' ', url);
     return this.http.post(url, user);
   }
 
@@ -36,6 +35,11 @@ export class UserAccountService {
     return this.http.post(url, u);
   }
 
+  getUserById(id: number): Observable<any> {
+    const url = environment.api + '/user/' + id;
+    return this.http.get(url);
+  }
+
   setCurrUserDetails(user: UserDetails) {
     this.user.next(user);
     let usr;
@@ -45,5 +49,11 @@ export class UserAccountService {
 
   getCurrUserDetails() {
     return JSON.parse(localStorage.getItem('currUser'));
+  }
+
+  updateUserInfo(id, data) {
+    const url = environment.api + '/user/' + id;
+    return this.http.put(url, data);
+
   }
 }

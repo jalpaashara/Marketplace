@@ -12,6 +12,8 @@
 
 #environment
 /src/environments
+/pmp-api/environment
+/pmp-api/venv
 
 # profiling files
 chrome-profiler-events*.json
@@ -25,6 +27,7 @@ speed-measure-plugin*.json
 *.launch
 .settings/
 *.sublime-workspace
+/pmp-api/.idea/*
 
 # IDE - VSCode
 .vscode/*
@@ -47,6 +50,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# API
-/pmp-api
+/pmp-api/*.iws

@@ -13,7 +13,7 @@
           </li>
           <!-- Calling SignOut() Api from AuthService -->
           <li class="nav-item">
-            <a class="nav-link" (click)="authService.SignOut()">
+            <a class="nav-link" (click)="SignOut()">
               Log out
             </a>
           </li>
@@ -26,37 +26,56 @@
       <div class="inner-adjust">
 
         <div class="pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">User Profile</h1>
+          <h3 class="h3">User Profile</h3>
         </div>
         <!-- Show user data when logged in -->
         <div class="row" >
           <div class="col-md-12">
             <div class="media">
               <div class="media-body">
-                <h1>Hello: {{userDetails.firstName}}</h1>
+                <h4>Hello {{userDetails.firstName}}</h4>
                 <p>Email: <strong>{{userDetails.email}}</strong></p>
                 <p>
                   <a routerLink="/change-password">Change Password</a>
                 </p>
 
-                <h5>Contatct Information</h5>
+                <h6>Contatct Information</h6>
+
                 <div><b>FirstName</b>:&nbsp;{{userDetails.firstName}}&nbsp;&nbsp;
-                  <button class="btn btn-outline-danger">Edit</button>
+                  <button #editFN class="btn btn-outline-danger" (click)="editClickFN()" value="firstName" style="height: 30px;padding:2px 12px">Edit</button>
                 </div><br>
+                <div *ngIf="update['firstName']" class="form-group">
+                  <input type="text" class="form-control" name="firstName" placeholder="Enter New FirstName" style="margin-bottom: 5px; width: 500px" #newFirstName required>
+                  <button class="btn btn-warning"  (click)="updateUserInfo('firstName', newFirstName.value)">Update</button>&nbsp;&nbsp;
+                  <button class="btn btn-success" (click)="cancelClick()">Cancel</button>
+                </div>
+
                 <div><b>LastName</b>:&nbsp;{{userDetails.lastName}}&nbsp;&nbsp;
-                  <a routerLink=#>Edit</a>
+                  <button #editLN class="btn btn-outline-danger" (click)="editClickLN()" value="lastName" style="height: 30px;padding:2px 12px">Edit</button>
                 </div><br>
+                <div *ngIf="update['lastName']" class="form-group">
+                  <input type="text" class="form-control" placeholder="Enter New LastName" style="margin-bottom: 5px; width: 500px" #newlastName required>
+                  <button class="btn btn-warning" (click)="updateUserInfo('lastName', newlastName.value)" >Update</button>&nbsp;&nbsp;
+                  <button class="btn btn-success" (click)="cancelClick()">Cancel</button>
+                </div>
+
                 <div><b>Phone</b>:&nbsp;<span *ngIf="userDetails.phone==' '">Not Available</span>
                   {{userDetails.phone}}&nbsp;&nbsp;
-                  <button class="btn btn-outline-danger">Edit</button></div>
+                  <button #editP class="btn btn-outline-danger" (click)="editClickP()" value="phone" style="height: 30px;padding:2px 12px">Edit</button>
+                <div *ngIf="update['phone']" class="form-group">
+                  <input type="tel" class="form-control" placeholder="Enter New Phone Number" style="margin-bottom: 5px; width: 500px" #newPhone required>
+                  <button class="btn btn-warning" (click)="updateUserInfo('phone', newPhone.value)" >Update</button>&nbsp;&nbsp;
+                  <button class="btn btn-success" (click)="cancelClick()">Cancel</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
       </div>
+      </div>
     </main>
 
   </div>
 </div>
-<footer class="foot">&copy; JAMMR 2020</footer>
+<footer class="foot fixed-bottom">&copy; JAMMR 2020</footer>

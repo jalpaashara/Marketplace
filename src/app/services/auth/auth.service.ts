@@ -25,7 +25,6 @@ export class AuthService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router  ) {
     this.userData = afAuth.authState;
-    console.log(this.userData);
   }
 
   isSetUserSession(): boolean {
@@ -36,7 +35,6 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
         .then(res => {
-          console.log('SignIn: ' + res);
           if (res.user.emailVerified) {
             this.router.navigate(['dashboard']);
             this.SetUserData(res.user);
@@ -104,7 +102,6 @@ export class AuthService {
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
     SetUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    console.log(userRef);
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -120,7 +117,7 @@ export class AuthService {
           localStorage.removeItem('user');
           this.loggedIn.next(this.isSetUserSession());
           this.router.navigate(['home']);
-          resolve(res);
+          resolve({Signout: 'Success'});
         }, err => reject(err));
       });
   }

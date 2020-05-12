@@ -45,13 +45,11 @@ export class SellProductComponent implements OnInit {
     this.getCategories();
 
     if (this.userAccountService.getCurrUserDetails() !== undefined) {
-      console.log(this.userAccountService.getCurrUserDetails());
       this.userDetails = this.userAccountService.getCurrUserDetails();
     } else {
       this.userAccountService.currUser
         .subscribe(
           (usr) => {
-            console.log(usr);
             this.userDetails = usr;
           },
           error => {console.log(error); });
@@ -72,7 +70,6 @@ export class SellProductComponent implements OnInit {
     console.log(this.createProductData());
     this.submitted = true;
     if (this.sellProductForm.invalid) {
-      console.log('Invalid: ', this.sellProductForm.invalid, ' ', this.formVal, ' ', this.sellProductForm.value);
       return;
     }
     this.setProduct(this.createProductData());
@@ -93,12 +90,8 @@ export class SellProductComponent implements OnInit {
     this.productService.setProductDetails(productData)
       .subscribe(
         (res) => {
-              console.log(res);
               this.prodId = res;
-              console.log(this.pictures);
-              console.log(this.prodId.prodId);
               for (let i = 0; i < this.pictures.length; i++) {
-                console.log(this.pictures[i].name);
                 this.setPictures(this.pictures[i]);
               }
         }, err => console.log(err));
@@ -108,7 +101,6 @@ export class SellProductComponent implements OnInit {
   setPictures(img) {
     const formData = new FormData();
     formData.append('file', img);
-    console.log(formData);
     this.productService.setProductImage(this.prodId.prodId, formData)
       .subscribe(res => {console.log(res); }, error => console.log(error));
   }

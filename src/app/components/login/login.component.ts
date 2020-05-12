@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
   onSubmitLogin() {
     this.submitted = true;
     if (this.loginForm.invalid) {
-      console.log('Invalid: ', this.loginForm.invalid, ' ', this.loginForm.errors);
       return;
     }
     return this.authService.SignIn(this.loginForm.value.email, this.loginForm.value.password)
@@ -53,7 +52,6 @@ export class LoginComponent implements OnInit {
                     lastName: usr[0].lastName,
                     phone: usr[0].phone
                   };
-                  console.log('res ', usr);
                   this.userAccountService.setCurrUserDetails(this.userDetails);
                 }, error => {
                   console.log(error.message);

@@ -31,7 +31,7 @@
           <!-- Product Description -->
           <div class="product-description">
             <span>{{productData.categoryName}}</span><br>
-            <h5>{{productData.name}}</h5>
+            <h5 style="text-transform: capitalize">{{productData.name}}</h5>
 
             <!-- Product Pricing -->
             <div class="product-price">
@@ -39,15 +39,34 @@
             </div>
             <br>
             <span style="color:black; ">Description:</span>
-            <p>{{productData.description}}</p>
+            <p>
+              <span *ngIf="productData.description==''"
+                    style="color: black; font-family:Calibri, sans-serif;text-transform: capitalize;font-size:18px ">
+              Description not available</span>
+              {{productData.description}}</p>
           </div>
 
           <div *ngIf="userDetails.id==productData.userId; else elseTemplate">
             <button class="btn btn-danger" (click)="removeProduct()">Delete</button>
           </div>
           <ng-template #elseTemplate>
-            <button class="btn btn-warning" (click)="sendEmailToSeller()">Click to contact the seller</button>
+            <div><button class="btn btn-warning" (click)="sendEmailToSeller()" [disabled]="enableMsg">Click to contact the seller &nbsp;
+              <span *ngIf="spin==true" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            </button>
+            </div>
+            <!--<div *ngIf="spin==true" class="spinner-border text-danger" role="status">
+              <span class="sr-only">Sending Email to the seller</span>&lt;!&ndash; THis is for accessibility&ndash;&gt;
+            </div>-->
+            <br>
+
+            <div *ngIf="enableMsg==true" class="msg">
+              <p>Email has been sent to the seller regarding your interest.</p>
+              <p>Hold back and sit tight for a response from user. Keep checking your email.</p>
+            </div>
+
           </ng-template>
+
+          <!--<button class="btn btn-warning" (click)="sendEmailToSeller()">Click to contact the seller</button>-->
         </div>
       </div>
     </div>

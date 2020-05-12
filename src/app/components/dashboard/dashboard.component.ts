@@ -44,7 +44,6 @@ export class DashboardComponent implements OnInit {
       });
 
     if (this.userAccountService.getCurrUserDetails() !== undefined) {
-        console.log(this.userAccountService.getCurrUserDetails());
         this.userDetails = this.userAccountService.getCurrUserDetails();
     } else {
       this.userAccountService.currUser

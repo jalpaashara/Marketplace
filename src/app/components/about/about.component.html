@@ -1,5 +1,35 @@
-<app-navbar></app-navbar>
-<div class="container-fluid" style="margin-top: 60px">
-  <div class="row"><p>about works!</p></div>
-</div>
-<footer class="foot">&copy; JAMMR 2020</footer>
+  <app-navbar></app-navbar>
+
+  <div class="wrapper" style="margin-top: 60px">
+      <div class="about-section">
+        <div class="about-header">
+          <h1>About Us</h1><br>
+        </div>
+        <div class="about-text">
+          <p style="font-size:24px">Pace Market Place is a platform for free user-generated classified advertisements for students.
+            This e-commerce platform will allow students to buy and sell products by posting advertisements.
+            Our mission is to allow students to connect with each other and share their personal experience along with a
+            much-required platform to get rid of unwanted items or obtain products from other students of Pace University.</p>
+        </div>
+      </div>
+      <div class="about-team">
+        <div class="about-team-header">
+          <h2>Our Team</h2>
+        </div>
+        <div class="row">
+          <div class="col-sm-2" style="margin: 20px" *ngFor="let t of team">
+            <div class="card">
+              <div class="card-img">
+                <img src="{{t.image}}" alt="{{t.name.split(' ')[0]}}" style="width:100%;height: 200px">
+              </div>
+              <div class="card-footer" style="height:72px">
+                <h6 style="text-align: center;padding-top: 5px">{{t.name}}</h6>
+              </div>
+
+            </div>
+        </div>
+      </div>
+
+  </div>
+  </div>
+  <footer class="foot">&copy; JAMMR 2020</footer>

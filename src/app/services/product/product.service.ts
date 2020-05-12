@@ -19,7 +19,7 @@ export class ProductService {
     return this.http.get(url);
   }
 
-  getCategoryById(catId) {
+  getCategoryById(catId): Observable<any> {
     const url = this.url + '/categories/' + catId;
     return this.http.get(url);
   }
@@ -58,5 +58,10 @@ export class ProductService {
   removeProduct(prodId) {
     const url = this.url + '/product' + '/' + prodId;
     return this.http.delete(url, prodId);
+  }
+
+  sendEmail(data) {
+    const url = this.url + '/email';
+    return this.http.post(url, data);
   }
 }

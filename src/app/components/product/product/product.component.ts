@@ -1,15 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../services/product/product.service';
-import {DomSanitizer} from '@angular/platform-browser';
-import { pipe } from 'rxjs';
-import {map} from 'rxjs/operators';
-import {async} from 'rxjs/internal/scheduler/async';
 import {environment} from '../../../../environments/environment';
 import {AuthService} from '../../../services/auth/auth.service';
 import {UserAccountService} from '../../../services/user/user-account.service';
 import {UserDetails} from '../../../models/user-details';
 import {ToastrService} from 'ngx-toastr';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-product',
@@ -24,6 +21,8 @@ export class ProductComponent implements OnInit {
   currImg: any;
   private isLoggedIn: boolean;
   public userDetails: UserDetails;
+  spin = false;
+  enableMsg = false;
 
   constructor(public authService: AuthService,
               public route: ActivatedRoute,
@@ -42,7 +41,6 @@ export class ProductComponent implements OnInit {
       this.getProductImage();
 
       if (this.userAccountService.getCurrUserDetails() !== undefined) {
-        console.log(this.userAccountService.getCurrUserDetails());
         this.userDetails = this.userAccountService.getCurrUserDetails();
       } else {
         this.userAccountService.currUser
@@ -60,21 +58,20 @@ export class ProductComponent implements OnInit {
 
   getProductById() {
     this.prodService.getProductById(this.productID)
+      .pipe(map(r => r[0]))
       .subscribe((res) => {
-        console.log(res[0]);
-        this.productData = res[0];
+        this.productData = res;
         this.prodService.getCategoryById(this.productData.categoryId)
           .subscribe((cat) => {
             const c = cat;
-            this.productData.categoryName = c['name'];
-            console.log(this.productData.categoryName);
-
+            this.productData.categoryName = c.name;
           });
         if (this.productData === undefined) {
           this.router.navigateByUrl('dashboard');
         }
       });
   }
+
 
  getProductImage() {
     this.prodService.getProdAllImagesId(this.productID)
@@ -90,8 +87,6 @@ export class ProductComponent implements OnInit {
 
       }, error => {console.log(error); }
       );
-
-    // this.showImage();
   }
 
   showImage(url) {
@@ -109,6 +104,41 @@ export class ProductComponent implements OnInit {
   }
 
   sendEmailToSeller() {
+    this.spin = true;
+    const s = 'Interest shown for your listing on Pace Marketplace';
+    console.log(this.productData.userId);
+    const id = this.productData.userId;
+
+    this.userAccountService.getUserById(id)
+      .pipe(map(t => t))
+      .subscribe((res: any) => {
+        console.log(res.firstName);
+        const r = res;
+        const b = '' +
+          '<p>Hi ' + r.firstName + ',</p>' +
+          '<p>A user has shown interest in purchasing your item ' + this.productData.name +
+          '<br> We request you to respond to their request via email mentioned below.</p>' +
+          '<p>Information of the potential buyer:<br>' +
+          '<b>Name: </b>' + this.userDetails.firstName + ' ' + this.userDetails.lastName +
+          '<br><b>Email: </b>' + this.userDetails.email + '</p>'
+        ;
+        const email = [];
+        email.push(r.email);
+        const data = {
+          subject: s,
+          recipients: email,
+          body: b
+        };
+
+        console.log(data);
+        this.prodService.sendEmail(data)
+          .subscribe(send => {
+            console.log(send);
+            this.spin = false;
+            this.enableMsg = true;
+          });
+      });
+
 
   }
 }
