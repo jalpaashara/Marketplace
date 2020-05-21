@@ -28,7 +28,7 @@ import { ProductComponent } from './components/product/product/product.component
 import {ChangePasswordComponent} from './components/change-password/change-password.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastContainerModule, ToastrModule} from 'ngx-toastr';
-import {AngularFireFunctionsModule} from '@angular/fire/functions';
+import { DragNDropDirective } from './components/sell-product/drag-ndrop.directive';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import {AngularFireFunctionsModule} from '@angular/fire/functions';
     MyAccountComponent,
     SellProductComponent,
     ProductComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    DragNDropDirective
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

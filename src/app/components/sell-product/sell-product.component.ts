@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {DashboardService} from '../../services/dashboard/dashboard.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -18,8 +18,10 @@ export class SellProductComponent implements OnInit {
   categories;
   private userDetails: UserDetails;
   submitted = false;
-  pictures: FileList;
   prodId;
+  @ViewChild('pic', { static: false }) fileDropEl: ElementRef;
+  pictures: File[] = [];
+
 
   get formVal() { return this.sellProductForm.controls; }
 
@@ -39,11 +41,7 @@ export class SellProductComponent implements OnInit {
       prodPrice: ['', Validators.required],
       prodImages: ['', [Validators.required]]
     });
-
-
-
     this.getCategories();
-
     if (this.userAccountService.getCurrUserDetails() !== undefined) {
       this.userDetails = this.userAccountService.getCurrUserDetails();
     } else {
@@ -67,9 +65,10 @@ export class SellProductComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.createProductData());
+    console.log(this.pictures.length);
     this.submitted = true;
     if (this.sellProductForm.invalid) {
+      console.log(this.formVal.prodImages.errors);
       return;
     }
     this.setProduct(this.createProductData());
@@ -91,6 +90,7 @@ export class SellProductComponent implements OnInit {
       .subscribe(
         (res) => {
               this.prodId = res;
+          // tslint:disable-next-line:prefer-for-of
               for (let i = 0; i < this.pictures.length; i++) {
                 this.setPictures(this.pictures[i]);
               }
@@ -103,5 +103,59 @@ export class SellProductComponent implements OnInit {
     formData.append('file', img);
     this.productService.setProductImage(this.prodId.prodId, formData)
       .subscribe(res => {console.log(res); }, error => console.log(error));
+  }
+
+  /*File Drop*/
+  onDrop($event) {
+    console.log('On drop ', $event);
+    this.prepareFilesList($event);
+  }
+
+  fileBrowseHandler(files) {
+    console.log('fileBrowseHandler ', files);
+    this.prepareFilesList(files);
+  }
+
+  deleteFile(index: number) {
+    this.pictures.splice(index, 1);
+    if (this.pictures.length > 0 && this.pictures.length < 6) {
+      this.sellProductForm.controls.prodImages.clearValidators();
+      this.sellProductForm.controls.prodImages.updateValueAndValidity();
+      console.log(this.sellProductForm.controls.prodImages);
+    } else if (this.pictures.length < 1) {
+      console.log('file size < 1>');
+      this.sellProductForm.controls.prodImages.clearValidators();
+      this.sellProductForm.controls.prodImages.updateValueAndValidity();
+      this.sellProductForm.controls.prodImages.setErrors({required: true});
+    }
+  }
+
+   prepareFilesList(files: Array<any>) {
+    console.log('prepareFileList ', this.pictures);
+    for (const item of files) {
+      this.pictures.push(item);
+    }
+    console.log('formvalue ', this.formVal);
+    if (this.pictures.length > 0 && this.pictures.length < 6) {
+      this.sellProductForm.controls.prodImages.clearValidators();
+      this.sellProductForm.controls.prodImages.updateValueAndValidity();
+      console.log(this.sellProductForm.controls.prodImages);
+    } else if (this.pictures.length > 5) {
+      console.log('file size > 5');
+      this.sellProductForm.controls.prodImages.clearValidators();
+      this.sellProductForm.controls.prodImages.updateValueAndValidity();
+      this.sellProductForm.controls.prodImages.setErrors({maxLength: true});
+    }
+  }
+
+  formatBytes(bytes, decimals) {
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 }

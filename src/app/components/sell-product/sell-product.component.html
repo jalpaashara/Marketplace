@@ -1,69 +1,113 @@
-<div class="modal-header">
-  <h4 class="modal-title" id="modal-title">Create a Listing to sell your item</h4>
-  <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')" >
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <div class="container" style="margin-top: 20px">
-    <div class="form-container col-10">
-      <form [formGroup]="sellProductForm" (ngSubmit)='onSubmit()'>
-        <div class="form-group">
-          <label for="category">Choose a Category</label>
-          <select class="form-control" id="category" name="category" formControlName="category"
-                  required [ngClass]="{ 'is-invalid': submitted && formVal.category.errors }">
-            <option value="" hidden>&#45;&#45;Please choose a category&#45;&#45;</option>
-            <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
-          </select>
-          <div *ngIf="submitted && formVal.category.errors" class="invalid-feedback">
-            <div *ngIf="formVal.category.errors.required">Please choose a category</div>
-          </div>
-        </div>
-        <div class="form-group ">
-          <label for="name">Product Name</label>
-          <input type="text" id="name" formControlName="prodName" class="form-control"
-                 [ngClass]="{ 'is-invalid': submitted && formVal.prodName.errors }">
-          <div *ngIf="submitted && formVal.prodName.errors" class="invalid-feedback">
-            <div *ngIf="formVal.prodName.errors.required">Product Name is required</div>
-          </div>
-        </div>
-        <div class="form-group ">
-          <label for="desc">Product Description</label>
-          <textarea id="desc" rows="7" maxlength="300" formControlName="prodDesc" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && formVal.prodDesc.errors }">
-          </textarea>
-          <div *ngIf="submitted && formVal.prodDesc.errors" class="invalid-feedback">
-            <div *ngIf="formVal.prodDesc.errors.required">Please write something about the product.</div>
-          </div>
-        </div>
+    <div class="modal-content"  role="modal" aria-labelledby="Sell Product Modal" aria-hidden="true">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Create a Listing to sell your item</h4>
+        <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')" >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid" style="margin-top: 20px">
+          <div class="form-container col-10">
+            <form [formGroup]="sellProductForm" (ngSubmit)='onSubmit()'>
+              <div class="form-group">
+                <label for="category">Choose a Category</label>
+                <select class="form-control" id="category" name="category" formControlName="category"
+                        required [ngClass]="{ 'is-invalid': submitted && formVal.category.errors }">
+                  <option value="" hidden>&#45;&#45;Please choose a category&#45;&#45;</option>
+                  <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+                </select>
+                <div *ngIf="submitted && formVal.category.errors" class="invalid-feedback">
+                  <div *ngIf="formVal.category.errors.required">Please choose a category</div>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label for="name">Product Name</label>
+                <input type="text" id="name" formControlName="prodName" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && formVal.prodName.errors }">
+                <div *ngIf="submitted && formVal.prodName.errors" class="invalid-feedback">
+                  <div *ngIf="formVal.prodName.errors.required">Product Name is required</div>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label for="desc">Product Description</label>
+                <textarea id="desc" rows="7" maxlength="300" formControlName="prodDesc" class="form-control"
+                          [ngClass]="{ 'is-invalid': submitted && formVal.prodDesc.errors }">
+                </textarea>
+                <div *ngIf="submitted && formVal.prodDesc.errors" class="invalid-feedback">
+                  <div *ngIf="formVal.prodDesc.errors.required">Please write something about the product.</div>
+                </div>
+              </div>
 
-        <div class="form-group ">
-          <label for="price">Product Price</label>
-          <input type="text" id="price" formControlName="prodPrice" class="form-control"
-                 [ngClass]="{ 'is-invalid': submitted && formVal.prodPrice.errors }">
-          <div *ngIf="submitted && formVal.prodPrice.errors" class="invalid-feedback">
-            <div *ngIf="formVal.prodPrice.errors.required">Product price is required</div>
+              <div class="form-group ">
+                <label for="price">Product Price</label>
+                <input type="text" id="price" formControlName="prodPrice" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && formVal.prodPrice.errors }">
+                <div *ngIf="submitted && formVal.prodPrice.errors" class="invalid-feedback">
+                  <div *ngIf="formVal.prodPrice.errors.required">Product price is required</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="dragDrop" appDragNDrop (fileDropped)="onDrop($event)">
+                  <input type="file" id="pictures" class="form-control-file" min="1" max="5"
+                         formControlName="prodImages" multiple accept="image/jpg, image/jpeg"
+                         (change)="fileBrowseHandler($event.target.files)" #pic
+                         [ngClass]="{'is-invalid': formVal.prodName.errors}">
+
+                  <svg class="bi bi-upload" width="2em" height="2em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M.5 8a.5.5 0 01.5.5V12a1 1 0 001 1h12a1 1 0 001-1V8.5a.5.5 0 011 0V12a2 2 0 01-2 2H2a2 2 0 01-2-2V8.5A.5.5 0 01.5 8zM5 4.854a.5.5 0 00.707 0L8 2.56l2.293 2.293A.5.5 0 1011 4.146L8.354 1.5a.5.5 0 00-.708 0L5 4.146a.5.5 0 000 .708z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 01.5.5v8a.5.5 0 01-1 0v-8A.5.5 0 018 2z" clip-rule="evenodd"/>
+                  </svg>
+
+                  <h6>
+                    Drag and Drop pictures here
+                  </h6>
+                  <h6>Or</h6>
+                  <label for="pictures">Click to select from your device</label>
+                  <div *ngIf="formVal.prodImages.errors" class="invalid-feedback">
+                    <div *ngIf="formVal.prodImages.errors.required"><b>Atleast ONE image is required</b></div>
+                    <div *ngIf="formVal.prodImages.errors.maxLength"><b>Atmost FIVE images allowed</b></div>
+                  </div>
+                </div>
+
+                <div class="files-list">
+                  <div class="single-file" *ngFor="let file of pictures; let i = index">
+                    <div>
+                      <svg class="bi bi-image picSvg" width="2em" height="2em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14.002 2h-12a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V3a1 1 0 00-1-1zm-12-1a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V3a2 2 0 00-2-2h-12z" clip-rule="evenodd"/>
+                        <path d="M10.648 7.646a.5.5 0 01.577-.093L15.002 9.5V14h-14v-2l2.646-2.354a.5.5 0 01.63-.062l2.66 1.773 3.71-3.71z"/>
+                        <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" clip-rule="evenodd"/>
+                      </svg>
+                    </div>
+                    <div class="info">
+                      <h6 class="name">
+                        {{ file?.name }}
+                      </h6>
+                      <p class="size">
+                        {{ formatBytes(file?.size, 2) }}
+                      </p>
+                    </div>
+
+                    <div class="delete" (click)="deleteFile(i)">
+                      <svg class="bi bi-trash-fill delSvg" width="2em" height="2em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button class="btn btn-warning" data-dismiss="modal">
+                  Add Listing
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-
-        <div class="form-group">
-          <label for="pictures">Pictures</label><br>
-          <input type="file" id="pictures" class="form-control-file" formControlName="prodImages" multiple accept="image/jpg, image/jpeg" (change)="(pictures = pic.files)" #pic
-                 [ngClass]="{ 'is-invalid': submitted && formVal.prodName.errors}">
-          <div *ngIf="submitted && formVal.prodImages.errors" class="invalid-feedback">
-            <div *ngIf="formVal.prodImages.errors.required">Atleast one image is required</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button class="btn btn-warning" data-dismiss="modal">
-            Add Listing
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" aria-label="Cancel" (click)="modal.dismiss('cancel click')">Cancel</button>
+      </div>
   </div>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-danger" aria-label="Cancel" (click)="modal.dismiss('cancel click')">Cancel</button>
-</div>
+

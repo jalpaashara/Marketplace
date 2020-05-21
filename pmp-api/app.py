@@ -70,7 +70,6 @@ def getCategories():
         cursor = mysql.connection.cursor()
         cursor.execute("SELECT id, name, img FROM category")
         cat = cursor.fetchall()
-        
         categories = []
         for i in cat:
             temp = {
@@ -79,9 +78,9 @@ def getCategories():
                 "img": i["img"].decode('utf-8')
             }
             categories.append(temp)
-        resp = jsonify(categories)
-        resp.status_code = 200
-        print("line 56 ", resp)
+        print(jsonify(tuple(categories)))
+        print(jsonify(categories))
+        resp = jsonify(tuple(categories))
         return resp
     except Exception as e:
         print(e)
@@ -157,7 +156,10 @@ def getProductById(productId):
             cursor = mysql.connection.cursor()
             select_stmt = "SELECT id, name, categoryId, userId, description, price, datediff(current_date(), createdDate) as days FROM products WHERE id = %(prodId)s"
             cursor.execute(select_stmt, {'prodId': productId})
-            product = cursor.fetchall()
+            product = cursor.fetchone()
+            
+            product['categoryName'] = ''
+            print(product)
             resp = jsonify(product)
             return resp
         except Exception as e:

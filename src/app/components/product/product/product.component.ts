@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../services/product/product.service';
 import {environment} from '../../../../environments/environment';
@@ -58,7 +58,6 @@ export class ProductComponent implements OnInit {
 
   getProductById() {
     this.prodService.getProductById(this.productID)
-      .pipe(map(r => r[0]))
       .subscribe((res) => {
         this.productData = res;
         this.prodService.getCategoryById(this.productData.categoryId)
@@ -75,7 +74,6 @@ export class ProductComponent implements OnInit {
 
  getProductImage() {
     this.prodService.getProdAllImagesId(this.productID)
-      // this.imageIds = ;
       .subscribe(
         res => {
         this.imageIds = res.images;
@@ -138,7 +136,5 @@ export class ProductComponent implements OnInit {
             this.enableMsg = true;
           });
       });
-
-
   }
 }
