@@ -1,9 +1,9 @@
 .grid-container {
   display: grid;
   grid-template-areas: "header" "wrapper" "footer";
-  grid-template-rows: 4% 92% 4%;
+  grid-template-rows: 7% 86% 7%;
   grid-template-columns: 1fr;
-  /*height: 100vh;*/
+  height: 100vh;
 }
 
 .app-nav { grid-area: header; }
@@ -43,12 +43,12 @@
 }
 
 .welcome{
-  margin: 20px 0px 25px 0px;
+  margin: 10px 0px 25px 0px;
   padding-left: 30px
 }
 
 .grid-row{
-  margin: 25px 30px 25px 30px;
+  margin: 30px 30px 25px 30px;
   display: grid;
   /*grid-template-columns: 1fr;*/
   grid-template-rows: 20px 1fr;
