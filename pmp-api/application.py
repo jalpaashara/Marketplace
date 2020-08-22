@@ -1,26 +1,29 @@
-import configparser, json, base64
+import json, base64
 from io import BytesIO
 from flask import Flask, jsonify, request, send_file
 from flask_mysqldb import MySQL
-import MySQLdb
 from flask_cors import CORS
 from flask_mail import Mail, Message
+import yaml
 
-app = Flask(__name__)
-CORS(app)
+application = Flask(__name__)
+CORS(application)
 
-config = configparser.RawConfigParser()
-config.read('environment/pmp-properties.properties')
+# config = configparser.RawConfigParser()
+# config.read('environment/pmp-properties.properties')
+
+with open("config.yaml", "r") as configfile:
+    config = yaml.load(configfile,yaml.FullLoader)
 
 # MySQL configurations
-app.config['MYSQL_HOST'] = config['mysql']['host']
-app.config['MYSQL_USER'] = config['mysql']['user']
-app.config['MYSQL_PASSWORD'] = config['mysql']['password']
-app.config['MYSQL_DB'] = config['mysql']['db']
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+application.config['MYSQL_HOST'] = config['mysql']['host']
+application.config['MYSQL_USER'] = config['mysql']['user']
+application.config['MYSQL_PASSWORD'] = config['mysql']['password']
+application.config['MYSQL_DB'] = config['mysql']['db']
+application.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
-mysql = MySQL(app)
-# mysql.init_app(app)
+mysql = MySQL(application)
+# mysql.init_app(application)
 
 google_mail_settings = {
     "MAIL_SERVER": config['smtp']['server'],
@@ -32,10 +35,10 @@ google_mail_settings = {
     "MAIL_DEFAULT_SENDER": config['smtp']['default_sender']
 }
 
-app.config.update(google_mail_settings)
-mail = Mail(app)
+application.config.update(google_mail_settings)
+mail = Mail(application)
 
-@app.route('/', methods = ['GET'])
+@application.route('/', methods = ['GET'])
 def index():
     try:
         cursor = mysql.connection.cursor()
@@ -47,7 +50,7 @@ def index():
     finally:
         cursor.close()
 
-@app.route('/email', methods=['POST'])
+@application.route('/email', methods=['POST'])
 def sendEmail():
     try:
         data = json.loads(request.data)
@@ -64,7 +67,7 @@ def sendEmail():
     finally:
         print("end finally")
 
-@app.route('/categories', methods=['GET'])
+@application.route('/categories', methods=['GET'])
 def getCategories():
     try:
         cursor = mysql.connection.cursor()
@@ -87,7 +90,7 @@ def getCategories():
     finally:
         cursor.close()
     
-@app.route('/categories/<int:categoryId>', methods=['GET'])
+@application.route('/categories/<int:categoryId>', methods=['GET'])
 def getCategoryById(categoryId):
     try:
         cursor = mysql.connection.cursor()
@@ -106,7 +109,7 @@ def getCategoryById(categoryId):
     finally:
         cursor.close()
 
-@app.route('/products', methods=['GET'])
+@application.route('/products', methods=['GET'])
 def getProducts():
     try:
         # conn = mysql.connect()
@@ -127,7 +130,7 @@ def getProducts():
     finally:
         cursor.close()
 
-@app.route('/products', methods=['POST'])     
+@application.route('/products', methods=['POST'])     
 def setProducts():   
     try:
         data = json.loads(request.data)
@@ -149,7 +152,7 @@ def setProducts():
     except Exception as e:
             print(e)
 
-@app.route('/product/<int:productId>', methods=['GET', 'PUT', 'DELETE'])
+@application.route('/product/<int:productId>', methods=['GET', 'PUT', 'DELETE'])
 def getProductById(productId):
     if (request.method == 'GET'):
         try:
@@ -183,7 +186,7 @@ def getProductById(productId):
     else:
         return 'NOT IMPLEMENTED'
 
-@app.route('/user/<int:userId>', methods=['GET', 'PUT', 'DELETE'])
+@application.route('/user/<int:userId>', methods=['GET', 'PUT', 'DELETE'])
 def user(userId):
     if (request.method == 'GET'):
         try:
@@ -230,7 +233,7 @@ def user(userId):
     else:
         return 'NOT IMPLEMETED'  
 
-@app.route('/user', methods=['POST'])
+@application.route('/user', methods=['POST'])
 def signup():
     try:
         print('line 121',request.data, ' ', len(request.data))
@@ -262,7 +265,7 @@ def signup():
     finally:
      cursor.close()
 
-@app.route('/product/<int:productId>/image', methods=['POST', 'GET'])
+@application.route('/product/<int:productId>/image', methods=['POST', 'GET'])
 def productImages(productId):
     if (request.method == 'POST'):
         try:
@@ -314,7 +317,7 @@ def productImages(productId):
             cursor.close()
 
 
-@app.route('/product/<int:productId>/allImages', methods=[ 'GET'])
+@application.route('/product/<int:productId>/allImages', methods=[ 'GET'])
 def getAllProductImageIds(productId):
     try:
         cursor = mysql.connection.cursor()
@@ -334,7 +337,7 @@ def getAllProductImageIds(productId):
     finally:
         cursor.close()
 
-@app.route('/image/<int:imageId>', methods=['GET'])
+@application.route('/image/<int:imageId>', methods=['GET'])
 def getImageById(imageId):
     try:
         cursor = mysql.connection.cursor()
@@ -366,4 +369,5 @@ def write_file(data, filename):
         file.write(data)
 
 if __name__ == '__main__':
-	 app.run()
+    application.debug = True
+    application.run()

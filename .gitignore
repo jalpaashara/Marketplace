@@ -12,7 +12,7 @@
 
 #environment
 /src/environments
-/pmp-api/environment
+/pmp-api/config.yaml
 /pmp-api/venv
 
 # profiling files
