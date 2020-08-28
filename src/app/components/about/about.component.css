@@ -1,4 +1,15 @@
+.grid-container {
+  display: grid;
+  grid-template-areas: "header" "wrapper" "footer";
+  grid-template-rows: 60px 1fr 60px;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+.app-nav { grid-area: header; }
+
 .foot {
+  grid-area: footer;
   font-family: "Calibri", sans-serif;
   font-size: 20px;
   background-color: #041e42;
@@ -12,24 +23,27 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .wrapper {
+  grid-area: wrapper;
   display: grid;
-  grid-template-rows: 40% 60%;
+  grid-template-rows: .4fr .6fr;
   grid-template-columns: 1fr;
+  margin-top: 0px;
 }
 
 .about-section {
   display: grid;
-  grid-template-rows: 40% 60%;
+  grid-template-rows: .4fr .6fr;
   grid-template-columns: 1fr;
   padding: 50px;
   text-align: center;
   background-color: #dc3545;
   color: white;
+  margin: 0;
 }
 
 .about-team{
   display: grid;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: .1fr .9fr;
   grid-template-columns: 1fr;
   text-align: center;
   margin: 20px;
@@ -38,6 +52,10 @@
 
 .title {
   color: grey;
+}
+
+.text-font{
+  font-size:24px;
 }
 
 .button {
@@ -60,5 +78,17 @@
   .column {
     width: 100%;
     display: block;
+  }
+
+  .about-section {
+    display: grid;
+    grid-template-rows: .2fr .8fr;
+    grid-template-columns: 1fr;
+  }
+
+  .about-team{
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    grid-template-columns: 1fr;
   }
 }
