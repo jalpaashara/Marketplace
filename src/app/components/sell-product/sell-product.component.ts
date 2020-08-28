@@ -65,15 +65,15 @@ export class SellProductComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.pictures.length);
+    // console.log(this.pictures.length);
     this.submitted = true;
     if (this.sellProductForm.invalid) {
-      console.log(this.formVal.prodImages.errors);
+      // console.log(this.formVal.prodImages.errors);
       return;
     }
     this.setProduct(this.createProductData());
     this.toastr.success('Product successfully listed.');
-    this.modal.dismiss('Add Listing Click');
+    this.modal.close('Add Listing Click');
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['dashboard']);
@@ -123,7 +123,7 @@ export class SellProductComponent implements OnInit {
       this.sellProductForm.controls.prodImages.updateValueAndValidity();
       console.log(this.sellProductForm.controls.prodImages);
     } else if (this.pictures.length < 1) {
-      console.log('file size < 1>');
+      // console.log('file size < 1>');
       this.sellProductForm.controls.prodImages.clearValidators();
       this.sellProductForm.controls.prodImages.updateValueAndValidity();
       this.sellProductForm.controls.prodImages.setErrors({required: true});
@@ -131,17 +131,17 @@ export class SellProductComponent implements OnInit {
   }
 
    prepareFilesList(files: Array<any>) {
-    console.log('prepareFileList ', this.pictures);
+    // console.log('prepareFileList ', this.pictures);
     for (const item of files) {
       this.pictures.push(item);
     }
-    console.log('formvalue ', this.formVal);
+    // console.log('formvalue ', this.formVal);
     if (this.pictures.length > 0 && this.pictures.length < 6) {
       this.sellProductForm.controls.prodImages.clearValidators();
       this.sellProductForm.controls.prodImages.updateValueAndValidity();
       console.log(this.sellProductForm.controls.prodImages);
     } else if (this.pictures.length > 5) {
-      console.log('file size > 5');
+      // console.log('file size > 5');
       this.sellProductForm.controls.prodImages.clearValidators();
       this.sellProductForm.controls.prodImages.updateValueAndValidity();
       this.sellProductForm.controls.prodImages.setErrors({maxLength: true});

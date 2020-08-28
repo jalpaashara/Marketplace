@@ -10,7 +10,9 @@
       <div class="row2">
         <div class="card" style="width: 14rem; height: 15rem" *ngFor="let r of product">
           <div class="card-body">
-            <img src="{{url+r.imageIds[0]}}" style="width: 100px; height: 100px; padding-bottom: 5px; margin-bottom: 5px">
+            <div *ngIf="r.imageIds[0]!=undefined">
+              <img src="{{url+r.imageIds[0]}}" style="width: 100px; height: 100px; padding-bottom: 5px; margin-bottom: 5px">
+          </div>
             <h6 class="card-title h6-font">{{r.prodName}}</h6>
             <span class="card-text h6-font">Price: ${{r.prodPrice}} </span>
           </div>

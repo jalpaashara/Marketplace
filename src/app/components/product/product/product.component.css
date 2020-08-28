@@ -27,8 +27,8 @@
   display: grid;
   grid-template-rows: 60px 1fr 60px;
   margin: 0;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  /*overflow: hidden;*/
 }
 
 .product-description h5 {

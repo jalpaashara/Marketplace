@@ -33,8 +33,8 @@
 .grid-container {
   display: grid;
   grid-template-areas: "header header header" "left vertical right" "footer footer footer";
-  grid-template-rows: 8% 1fr 7%;
-  grid-template-columns: 0.9fr 0.5% 1fr;
+  grid-template-rows: 8% 85% 7%;
+  grid-template-columns: 1fr 0 1fr;
   height: 100vh;
 }
 
@@ -42,7 +42,7 @@
   .grid-container {
     display: grid;
     grid-template-areas: "header" "left" "vertical" "right" "footer";
-    grid-template-rows: 8% 0.9fr 0.5% 1fr 7%;
+    grid-template-rows: 9% 0.9fr 0% 1fr 8%;
     grid-template-columns: 1fr;
   }
   .vertical{
