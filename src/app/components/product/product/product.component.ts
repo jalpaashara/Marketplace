@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit {
         this.userAccountService.currUser
           .subscribe(
             (usr) => {
-              console.log(usr);
+              // console.log(usr);
               this.userDetails = usr;
             },
             error => {console.log(error); });
@@ -60,11 +60,6 @@ export class ProductComponent implements OnInit {
     this.prodService.getProductById(this.productID)
       .subscribe((res) => {
         this.productData = res;
-        this.prodService.getCategoryById(this.productData.categoryId)
-          .subscribe((cat) => {
-            const c = cat;
-            this.productData.categoryName = c.name;
-          });
         if (this.productData === undefined) {
           this.router.navigateByUrl('dashboard');
         }
@@ -104,31 +99,36 @@ export class ProductComponent implements OnInit {
   sendEmailToSeller() {
     this.spin = true;
     const s = 'Interest shown for your listing on Pace Marketplace';
-    console.log(this.productData.userId);
     const id = this.productData.userId;
 
     this.userAccountService.getUserById(id)
       .pipe(map(t => t))
       .subscribe((res: any) => {
-        console.log(res.firstName);
+        // console.log(res.firstName);
         const r = res;
         const b = '' +
           '<p>Hi ' + r.firstName + ',</p>' +
-          '<p>A user has shown interest in purchasing your item ' + this.productData.name +
+          '<p>A user has shown interest in purchasing your item ' + (this.productData.name).trim() + '.' +
           '<br> We request you to respond to their request via email mentioned below.</p>' +
           '<p>Information of the potential buyer:<br>' +
           '<b>Name: </b>' + this.userDetails.firstName + ' ' + this.userDetails.lastName +
-          '<br><b>Email: </b>' + this.userDetails.email + '</p>'
+          '<br><b>Email: </b>' + this.userDetails.email + '</p>' +
+          '<br><p>Thanks, <br> Pace Marketplace Team</p>'
+        ;
+        const t = 'Hi ' + r.firstName + ',\n\n' + 'A user has shown interest in purchasing your item ' + (this.productData.name).trim() +
+          '.\nWe request you to respond to their request via email mentioned below. Information of the potential buyer:\n' +
+          'Name: ' + this.userDetails.firstName + ' ' + this.userDetails.lastName +
+          '\nEmail: ' + this.userDetails.email + '\n\nThanks,\nPace Marketplace Team'
         ;
         const email = [];
         email.push(r.email);
         const data = {
           subject: s,
           recipients: email,
-          body: b
+          body: b,
+          text: t
         };
 
-        console.log(data);
         this.prodService.sendEmail(data)
           .subscribe(send => {
             console.log(send);
