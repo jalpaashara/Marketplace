@@ -29,12 +29,12 @@
         <div class="col-sm-7">
 
           <!-- Product Description -->
-          <div class="product-description" *ngIf="productData!=undefined">
-            <span>{{productData.categoryName}}</span><br>
+          <div class="product-description">
+            <span >{{productData.categoryName}}</span><br>
             <h5 style="text-transform: capitalize">{{productData.name}}</h5>
 
             <!-- Product Pricing -->
-            <div class="product-price" *ngIf="productData!=undefined">
+            <div class="product-price">
               <span>${{productData.price}}</span>
             </div>
             <br>
@@ -46,7 +46,7 @@
               {{productData.description}}</p>
           </div>
 
-          <div *ngIf="productData!=undefined && userDetails.id==productData.userId; else elseTemplate">
+          <div *ngIf="userDetails.id==productData.userId; else elseTemplate">
             <button class="btn btn-danger" (click)="removeProduct()">Delete</button>
           </div>
           <ng-template #elseTemplate>

@@ -7,6 +7,7 @@ import {UserAccountService} from '../../../services/user/user-account.service';
 import {UserDetails} from '../../../models/user-details';
 import {ToastrService} from 'ngx-toastr';
 import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +16,7 @@ import {map} from 'rxjs/operators';
 })
 export class ProductComponent implements OnInit {
   productID: any;
+  prodObs: Observable<any>;
   productData: any;
   img = [];
   private imageIds;
@@ -57,6 +59,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProductById() {
+    this.prodObs = this.prodService.getProductById(this.productID);
     this.prodService.getProductById(this.productID)
       .subscribe((res) => {
         this.productData = res;
