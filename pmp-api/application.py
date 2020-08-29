@@ -73,7 +73,7 @@ def sendEmail():
       "status": "success",
       "message": "Mail sent"
     })
-  
+
   except Exception as e:
     print("exception: ", e)
   finally:
@@ -134,7 +134,7 @@ def getProducts():
             i+=1
         #print(products)
         resp = {'products': products}
-        return resp
+        return jsonify(resp)
     except Exception as e:
         print(e)
     finally:
@@ -156,7 +156,6 @@ def setProducts():
         mysql.connection.commit()
 
         resp=jsonify({'prodId':id})
-        resp.status_code = 200
         return resp
 
     except Exception as e:
@@ -292,10 +291,10 @@ def productImages(productId):
                 mysql.connection.commit()
                 resp = {'message': 'Success', 'imageId': id}
                 # resp.status_code = 200
-                return resp
+                return jsonify(resp)
             else:
                 resp = {'message': 'Correct file not received.'}
-            return resp
+            return jsonify(resp)
         except Exception as e:
             print(e)
         finally:
