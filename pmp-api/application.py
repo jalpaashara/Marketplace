@@ -68,10 +68,12 @@ def sendEmail():
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
       server.login(sender_email, password)
       server.sendmail(sender_email, receiver_email[0], message.as_string().encode('utf-8'))
-    return {
+
+    return jsonify({
       "status": "success",
       "message": "Mail sent"
-    }
+    })
+  
   except Exception as e:
     print("exception: ", e)
   finally:
