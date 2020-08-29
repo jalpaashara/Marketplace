@@ -77,6 +77,12 @@
   border-radius: 10px;
 }
 
+.img-thumbnail{
+  height:80px;
+  margin:10px;
+  padding:0;
+}
+
 @media screen and (max-width: 600px) {
   .container-fluid{
     display: block;

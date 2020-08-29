@@ -15,8 +15,8 @@
                    [src]="currImg" alt="" #currImage>
           </div>
 
-          <div class="row text-center" #thumbnails>
-            <div class="col-sm-1 text-center" style="height:80px;margin:20px;padding:0"
+          <div class="row text-center" style="margin: 10px" #thumbnails>
+            <div class="img-thumbnail"
                  *ngFor="let i of img">
                   <img data-image="1" [src]="i" alt="" class="text-center"
                        style="width:75px;height:75px;margin: 0;border-style: solid;border-color: #86989B"
