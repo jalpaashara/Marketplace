@@ -30,7 +30,7 @@
 
           <!-- Product Description -->
           <div class="product-description">
-            <span >{{productData.categoryName}}</span><br>
+            <span><a [routerLink]="['/browse/', productData.categoryName]" [queryParams]="{id: productData.categoryId}">{{productData.categoryName}}</a></span><br>
             <h5 style="text-transform: capitalize">{{productData.name}}</h5>
 
             <!-- Product Pricing -->

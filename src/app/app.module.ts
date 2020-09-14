@@ -29,6 +29,7 @@ import {ChangePasswordComponent} from './components/change-password/change-passw
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastContainerModule, ToastrModule} from 'ngx-toastr';
 import { DragNDropDirective } from './components/sell-product/drag-ndrop.directive';
+import { BrowseComponent } from './components/browse/browse.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { DragNDropDirective } from './components/sell-product/drag-ndrop.directi
     SellProductComponent,
     ProductComponent,
     ChangePasswordComponent,
-    DragNDropDirective
+    DragNDropDirective,
+    BrowseComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

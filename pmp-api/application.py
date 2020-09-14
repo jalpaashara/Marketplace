@@ -323,6 +323,29 @@ def productImages(productId):
             cursor.close()
 
 
+@application.route('/browse/<int:categoryId>', methods=['GET'])
+def getProductsByCategoryId(categoryId):
+    if (request.method == 'GET'):
+        try:
+            cursor = mysql.connection.cursor()
+            select_stmt = """SELECT id, name, categoryId, userId, description, price,
+                                  datediff(current_date(), createdDate) as days
+                             FROM products WHERE categoryId = %(categoryId)s
+                             ORDER BY days"""
+            cursor.execute(select_stmt, {'categoryId': categoryId})
+            rows = cursor.fetchall()
+            products = []
+            for row in rows:
+                print(row)
+                products.append(row)
+            resp = {'products': products}
+            return jsonify(resp)
+        except Exception as e:
+            print('345 exception: ', e)
+        finally:
+            cursor.close()
+
+
 @application.route('/product/<int:productId>/allImages', methods=[ 'GET'])
 def getAllProductImageIds(productId):
     try:

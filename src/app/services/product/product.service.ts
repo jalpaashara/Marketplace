@@ -64,4 +64,9 @@ export class ProductService {
     const url = this.url + '/email';
     return this.http.post(url, data);
   }
+
+  getProductsByCategoryId(categoryId): Observable<any>  {
+    const url = this.url + '/browse/' + categoryId;
+    return this.http.get(url);
+  }
 }
