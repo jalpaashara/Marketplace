@@ -30,6 +30,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastContainerModule, ToastrModule} from 'ngx-toastr';
 import { DragNDropDirective } from './components/sell-product/drag-ndrop.directive';
 import { BrowseComponent } from './components/browse/browse.component';
+import { CatnavComponent } from './components/catnav/catnav.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { BrowseComponent } from './components/browse/browse.component';
     ProductComponent,
     ChangePasswordComponent,
     DragNDropDirective,
-    BrowseComponent
+    BrowseComponent,
+    CatnavComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

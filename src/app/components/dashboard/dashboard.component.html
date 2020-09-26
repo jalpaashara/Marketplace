@@ -1,18 +1,18 @@
 <div class="grid-container">
   <app-navbar  class="app-nav"></app-navbar>
+
   <div class="wrapper">
     <div *ngIf="userDetails!=undefined" class="welcome"><h3>Welcome {{userDetails.firstName}},</h3></div>
-
+    <div class="cat">
+      <app-catnav></app-catnav>
+    </div>
     <div class="grid-row">
-      <div class="row1">
-        <!--<h5>Recently Added</h5>-->
-      </div>
       <div class="row2">
-        <div class="card" style="width: 14rem; height: 15rem" *ngFor="let r of product">
+        <div class="card" style="width: 13rem; height: 15rem" *ngFor="let r of product">
           <div class="card-body">
             <div *ngIf="r.imageIds[0]!=undefined">
-              <img src="{{url+r.imageIds[0]}}" style="width: 100px; height: 100px; padding-bottom: 5px; margin-bottom: 5px">
-          </div>
+              <img src="{{url+r.imageIds[0]}}" style="width: 120px; height: 120px; padding-bottom: 5px; margin-bottom: 5px">
+            </div>
             <h6 class="card-title h6-font">{{r.prodName}}</h6>
             <span class="card-text h6-font">Price: ${{r.prodPrice}} </span>
           </div>
@@ -21,21 +21,22 @@
       </div>
     </div>
 
-   <!-- <div class="grid-row2">
-      <div class="row1 text-md-center">
-        <h4 style="font-family: Snell Roundhand, cursive; letter-spacing: 3px">Look By Category</h4>
-      </div>
-      <div class="row-cat">
-        <div *ngFor="let cat of categories">
-          <img class="cat-img" src="{{cat.img}}"><br>
-          <h5 class="card-title">{{cat.name}}</h5>
-        </div>
-      </div>
-    </div>-->
+    <!-- <div class="grid-row2">
+       <div class="row1 text-md-center">
+         <h4 style="font-family: Snell Roundhand, cursive; letter-spacing: 3px">Look By Category</h4>
+       </div>
+       <div class="row-cat">
+         <div *ngFor="let cat of categories">
+           <img class="cat-img" src="{{cat.img}}"><br>
+           <h5 class="card-title">{{cat.name}}</h5>
+         </div>
+       </div>
+     </div>-->
 
 
   </div>
 
 
-<footer class="foot">&copy; JAMMR 2020</footer>
+  <footer class="foot">&copy; JAMMR 2020</footer>
+
 </div>

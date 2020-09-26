@@ -98,4 +98,8 @@ export class BrowseComponent implements OnInit {
       });
   }
 
+  onResize($event) {
+    console.log($event.target.innerWidth);
+    console.log($event.target);
+  }
 }

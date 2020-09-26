@@ -30,3 +30,7 @@
 .ml{
   margin-left: 30%;
 }
+
+svg{
+  vertical-align: text-bottom;
+}

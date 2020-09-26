@@ -11,6 +11,7 @@ import {ForgotPasswordComponent} from './components/forgot-password/forgot-passw
 import {ProductComponent} from './components/product/product/product.component';
 import {ChangePasswordComponent} from './components/change-password/change-password.component';
 import {BrowseComponent} from './components/browse/browse.component';
+import {CatnavComponent} from './components/catnav/catnav.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },

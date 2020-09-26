@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   constructor(public authService: AuthService,
               public router: Router,
               public userAccountService: UserAccountService,
-              private productService: ProductService) {
+              public productService: ProductService) {
   }
 
   ngOnInit() {

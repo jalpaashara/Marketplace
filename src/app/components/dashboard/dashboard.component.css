@@ -8,6 +8,11 @@
 
 .app-nav { grid-area: header; }
 
+.cat {
+  margin: 15px 30px 30px 30px;
+  box-shadow: 10px 10px 5px 0px #f7f7f9;
+}
+
 .foot {
   grid-area: footer;
   font-family: "Calibri", sans-serif;
@@ -25,7 +30,7 @@
   /*min-width: 1450px;*/
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 4% 96%;
+  grid-template-rows: 3% 9% 88%;
   /*margin-top: 50px;*/
   background-color: #f7f7f9;
 }
@@ -39,7 +44,7 @@
   margin: 30px 30px 25px 30px;
   display: grid;
   /*grid-template-columns: 1fr;*/
-  grid-template-rows: 20px 1fr;
+  grid-template-rows: 1fr;
   /*border-style: solid;*/
   /*border-color: #041e42;*/
   box-shadow: 10px 10px 5px 0px #f7f7f9;
@@ -59,9 +64,7 @@
 }
 
 .row2{
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 30px;
+  padding: 30px;
   margin-top: 0px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -105,7 +108,7 @@
   .grid-row{
     margin: 10px 0px 0px 0px;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 0.2fr 0.8fr;
     grid-template-rows: 1fr;
     /*border-style: solid;*/
     /*border-color: #041e42;*/

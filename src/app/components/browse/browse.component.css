@@ -14,10 +14,9 @@
   font-size: 20px;
   background-color: #041e42;
   color: white;
-  margin: 0;
+  margin: 10px 0px 0px 0px;
   padding-top: 12px;
   text-align: center;
-  /*min-width: 1450px;*/
 }
 
 .wrapper{
@@ -26,6 +25,7 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr;
+  margin-bottom: 20px;
 }
 
 .welcome{
@@ -40,14 +40,16 @@
   padding: 30px 30px 3px 30px;
   margin-top: 0px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2,1fr);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: min-content;
   grid-row-gap: 40px;
   grid-column-gap: 30px;
 }
 
 .card{
   box-shadow: 5px 0px 5px 0px #f7f7f9;
+  width: 13.5rem;
+  height: 15rem;
 }
 
 .card-title{
@@ -70,11 +72,26 @@
   font-size: small;
 }
 
+@media screen and (max-width: 700px) {
+  .products{
+    padding: 10px 30px 3px 30px;
+    display: grid;
+    margin-top: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: min-content;
+    grid-column-gap: 25px;
+  }
+
+  .card{
+    box-shadow: 5px 0px 5px 0px #f7f7f9;
+    width: 12.85rem;
+    height: 15rem;
+  }
+}
 
 @media screen and (max-width: 550px) {
   .wrapper{
     display: block;
-    margin-bottom: 20px;
   }
 
   .welcome{
@@ -86,6 +103,7 @@
     display: grid;
     margin-top: 10px;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: min-content;
     /*grid-gap: 5px;*/
   }
 
@@ -97,5 +115,6 @@
     display: grid;
     margin-top: 10px;
     grid-template-columns: 1fr;
+    grid-template-rows: min-content;
   }
 }
