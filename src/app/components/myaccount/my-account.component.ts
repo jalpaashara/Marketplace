@@ -37,14 +37,12 @@ export class MyAccountComponent implements OnInit {
     if (this.isLoggedIn) {
       this.authService.userData.subscribe((res) => {
         this.userData = res;
-
         if (this.userAccountService.getCurrUserDetails() !== undefined) {
           this.userDetails = this.userAccountService.getCurrUserDetails();
         } else {
           this.userAccountService.currUser
             .subscribe(
               (usr) => {
-                console.log(usr);
                 this.userDetails = usr;
               },
               error => {
@@ -120,12 +118,34 @@ export class MyAccountComponent implements OnInit {
     this.authService.SignOut()
       .then(
         res => {
-          console.log(res);
           this.toastr.success('See you again soon!', ' You have been signed off!');
         },
         err => {
           console.log(err);
           this.toastr.error('Something went wrong! Please try again.');
+        }
+      );
+  }
+
+  DeleteUserAccount() {
+    this.authService.DeleteUser()
+      .then(
+        res => {
+          this.userAccountService.deleteUserAccount(this.userDetails.id).subscribe(
+            del => {
+
+              this.router.navigateByUrl('home');
+              this.toastr.success('We are sad to see yo go!', ' Your account has been deleted!');
+            },
+            err => {
+              console.log(err);
+              this.toastr.error('Something went wrong! Please try again.');
+            }
+          );
+        },
+        err => {
+          console.log(err);
+          this.toastr.error(err.message);
         }
       );
   }

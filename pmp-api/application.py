@@ -236,9 +236,17 @@ def user(userId):
         finally:
             cursor.close()
     elif (request.method == 'DELETE'):
-        return 'TO BE IMPLEMETED'
-    else:
-        return 'NOT IMPLEMETED'
+        try:
+            cursor = mysql.connection.cursor()
+            delete_stmt = "DELETE FROM users WHERE id = %(uId)s"
+            cursor.execute(delete_stmt, {'uId': userId})
+            mysql.connection.commit()
+            resp = jsonify({'Delete': 'Success'})
+            return resp
+        except Exception as e:
+            print('exception: ', e)
+        finally:
+            cursor.close()
 
 @application.route('/user', methods=['POST'])
 def signup():
