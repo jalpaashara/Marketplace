@@ -54,10 +54,6 @@ export class UserAccountService {
   updateUserInfo(id, data) {
     const url = environment.api + '/user/' + id;
     return this.http.put(url, data);
-  }
 
-  deleteUserAccount(id) {
-    const url = environment.api + '/user/' + id;
-    return this.http.delete(url);
   }
 }
