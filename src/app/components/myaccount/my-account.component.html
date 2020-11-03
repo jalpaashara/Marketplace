@@ -38,9 +38,8 @@
                 <p>
                   <a routerLink="/change-password">Change Password</a>
                 </p>
-                <br>
 
-                <h6>Contact Information:</h6>
+                <h6>Contatct Information</h6>
 
                 <div><b>FirstName</b>:&nbsp;{{userDetails.firstName}}&nbsp;&nbsp;
                   <button #editFN class="btn btn-outline-danger" (click)="editClickFN()" value="firstName" style="height: 30px;padding:2px 12px">Edit</button>
@@ -68,11 +67,7 @@
                   <button class="btn btn-warning" (click)="updateUserInfo('phone', newPhone.value)" >Update</button>&nbsp;&nbsp;
                   <button class="btn btn-success" (click)="cancelClick()">Cancel</button>
                 </div>
-              </div><br><br>
-
-                <div>
-                  <button class="btn btn-danger" (click)="DeleteUserAccount()">Delete Account</button>
-                </div><br>
+              </div>
             </div>
           </div>
         </div>
