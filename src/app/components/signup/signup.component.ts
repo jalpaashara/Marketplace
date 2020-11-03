@@ -82,7 +82,6 @@ export class SignupComponent implements OnInit {
       console.log('Invalid: ', this.registerForm.invalid, ' ', this.registerForm.errors);
       return;
     }
-    console.log(this.registerForm.value.firstName);
     this.userDetails.firstName = this.registerForm.value.firstName;
     this.userDetails.lastName = this.registerForm.value.lastName;
     this.userDetails.email = this.registerForm.value.email;
@@ -95,8 +94,6 @@ export class SignupComponent implements OnInit {
         this.userAccountService.setUserDetails(this.userDetails)
           .subscribe(res => {
             this.userDetails.id = res[0].id;
-            console.log('res ', res);
-            console.log('userDetails ', this.userDetails);
           }, error => {
             console.log(error.message);
           });

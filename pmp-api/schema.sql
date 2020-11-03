@@ -39,7 +39,7 @@ INSERT INTO `category` ( `name`, `img`) VALUES
     ('Travel pass','https://atlas-content-cdn.pixelsquid.com/stock-images/metro-card-RJEZMZD-600.jpg'),
 	('Electronics','https://images-na.ssl-images-amazon.com/images/I/51GmjUF1IDL._AC_SL1264_.jpg'),
 	('Personal accessories','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSq7bq-BLAgIiOqytBQLziQHS-rZgHq0TfMu3_FAWT3SwtaqqiQ&usqp=CAU"');
-    
+
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 -- Dumping structure for table pace_mp.products
@@ -55,8 +55,12 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`),
   KEY `FK_products_users` (`userId`),
   KEY `FK_products_category` (`categoryId`),
-  CONSTRAINT `FK_products_category` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`),
+  CONSTRAINT `FK_products_category` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
   CONSTRAINT `FK_products_users` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table pace_mp.products: ~2 rows (approximately)
@@ -72,7 +76,10 @@ CREATE TABLE IF NOT EXISTS `product_image` (
   `imageId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `productId` int(11) NOT NULL DEFAULT '0',
   `productImage` longblob NOT NULL,
-  UNIQUE KEY `image_id` (`imageId`)
+  PRIMARY KEY `image_id` (`imageId`)
+  CONSTRAINT FK_ProductImage foreign key (productId) references products(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table pace_mp.product_image: ~1 rows (approximately)
@@ -103,7 +110,7 @@ INSERT INTO `users` (`firstName`, `lastName`, `email`, `phone`) VALUES
 	('c', 'D', 'c.d@gmail.com', '1234567890'),
 	('a', 'c', 'a.c@gmail.com', '1234567890'),
     ('Jalpa','Ashara','jalpa.ashara@pace.edu',null);
-    
+
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
