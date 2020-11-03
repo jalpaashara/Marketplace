@@ -116,4 +116,15 @@ export class AuthService {
         }, err => reject(err));
       });
   }
+
+  DeleteUser() {
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.auth.currentUser.delete().then(res => {
+        this.loggedIn.next(false);
+        localStorage.clear();
+        this.router.navigate(['home']);
+        resolve({Delete: 'Success'});
+        }, (err) => reject(err));
+    });
+  }
 }

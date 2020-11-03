@@ -35,7 +35,6 @@ export class NavbarComponent implements OnInit {
     this.authService.SignOut()
       .then(
         res => {
-          console.log(res);
           this.toastr.success('See you again soon!', ' You have been signed off!');
           },
         err => {
