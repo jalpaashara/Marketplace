@@ -9,7 +9,7 @@ import {ProductService} from '../../services/product/product.service';
 export class CatnavComponent implements OnInit {
   categories;
 
-  constructor(public productService: ProductService) { }
+  constructor(public productService: ProductService) {}
 
   ngOnInit(): void {
     this.getCategories();

@@ -1,12 +1,8 @@
 .bg{
-  background-color: #041e42;
+  background-color: white;
   min-height: 60px;
-  display: block;
+  display: inline-block;
   border-radius: 10px;
-}
-
-.nav-link{
-  color: #ffffff;
 }
 
 a{
@@ -20,9 +16,8 @@ a{
 }
 
 ._f5jpa{
-  margin: auto;
+  /*margin: auto;*/
   position: relative;
-  justify-content: center;
   padding: 16px 0px;
 }
 
@@ -32,16 +27,8 @@ a{
   width: 100%;
 }
 
-._f5jpc{
-  position: relative;
-  width: 100%;
-}
-
 ._f5jpd{
-  overflow-x: paged-y;
-  height: 100%;
-  width: 100%;
-  display: flex;
+  padding: 0px;
 }
 
 ._ulack1{
@@ -51,26 +38,70 @@ a{
   flex-direction: row;
 }
 
-._liack1 {
-  display: inline-block;
-  margin-right: 8px;
-}
-
-._af5ck1{
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
 ._af1ck1{
-  padding: 4px 12px;
-  user-select: none;
+  padding: 4px 0px;
+  margin: 5px 20px 5px 20px;
   line-height: 26px;
-  margin: 5px 10px;
+  font-variant-caps: small-caps;
+  text-align: left;
+  color: midnightblue;
+  text-decoration: none;
+  opacity: 0.7;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  overflow: hidden;
 }
 
-._s1jka1{
-  color: white;
-  text-decoration: none;
-  font-weight: 400;
+._af1ck1:hover {
+  opacity: 1;
+}
+
+._af1ck1:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 51%;
+  right: 51%;
+  bottom: 0;
+  background: green;
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+._af1ck1:hover:before, ._af1ck1:focus:before, ._af1ck1:active:before {
+  left: 0;
+  right: 0;
+}
+
+.dropdownmenu{
+  display: none;
+}
+
+@media screen and (max-width: 550px) {
+  .bg{
+    background-color: #f7f7f9;
+    min-height: 0px;
+  }
+  ._ulack1>li{
+    display: none;
+  }
+
+  .dropdownmenu{
+    display: inline-block;
+    width: 100%;
+  }
+
+  .btn-width, ._f5jpd, ._f5jpa, .bg{
+    width: 100%;
+  }
+
+  ._f5jpa{
+    padding: 0px
+  }
+
 }

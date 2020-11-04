@@ -1,16 +1,28 @@
+<div class="bg">
+  <div class="_f5jpa">
+    <div class="_f5jpd navbar">
+      <ul class="_ulack1" routerLinkActive="active">
+        <li *ngFor="let cat of categories">
+          <button class="btn btn-link _af1ck1"
+                  [routerLink]="['/browse/', cat.name]" [queryParams]="{id: cat.id}">
+            {{cat.name}}
+          </button>
+        </li>
+      </ul>
 
-  <div class="bg">
-    <div class="_f5jpa">
-          <div class="_f5jpd navbar">
-            <ul class="_ulack1" routerLinkActive="active">
-              <li class="_liack1" *ngFor="let cat of categories">
-                <button type="button" class="btn-lg btn-success btn-block _af5ck1 _af1ck1"
-                        [routerLink]="['/browse/', cat.name]" [queryParams]="{id: cat.id}">
-                  {{cat.name}}
-                </button>
-              </li>
-            </ul>
-          </div>
+      <div class="dropdownmenu dropdown btn-group">
+        <button class="btn btn-block btn-dark dropdown-toggle" id="CategoriesDropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Browse by Categories</button>
+        <ul aria-labelledby="CategoriesDropdownMenuButton" class="dropdown-menu btn-width">
+          <li class="dropdown-item btn-width" *ngFor="let cat of categories">
+            <button type="button" class="btn dropdown-item-text btn-width"
+                    [routerLink]="['/browse/', cat.name]" [queryParams]="{id: cat.id}">
+              {{cat.name}}
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
-
+  </div>
+</div>

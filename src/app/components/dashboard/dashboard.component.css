@@ -9,8 +9,11 @@
 .app-nav { grid-area: header; }
 
 .cat {
-  margin: 15px 30px 30px 30px;
+  grid-area: cat;
+  margin: 0px 0px 25px 5px;
   box-shadow: 10px 10px 5px 0px #f7f7f9;
+  min-width: 195px;
+  background-color: #ffffff;
 }
 
 .foot {
@@ -30,18 +33,21 @@
   /*min-width: 1450px;*/
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 3% 9% 88%;
+  grid-template-areas: "welcome welcome" "cat grid-row";
+  /*grid-template-rows: 3% 9% 88%;*/
   /*margin-top: 50px;*/
   background-color: #f7f7f9;
 }
 
 .welcome{
+  grid-area: welcome;
   margin: 10px 0px 25px 0px;
   padding-left: 30px
 }
 
 .grid-row{
-  margin: 30px 30px 25px 30px;
+  grid-area: grid-row;
+  margin: 0px 15px 25px 5px;
   display: grid;
   /*grid-template-columns: 1fr;*/
   grid-template-rows: 1fr;
@@ -94,10 +100,13 @@
 
 @media screen and (max-width: 550px) {
   .wrapper{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 60px 1fr;
+    display: block;
     background-color: #f7f7f9;
+  }
+
+  .cat{
+    background-color: inherit;
+    margin: 0px;
   }
 
   .welcome{
@@ -106,10 +115,7 @@
   }
 
   .grid-row{
-    margin: 10px 0px 0px 0px;
-    display: grid;
-    grid-template-columns: 0.2fr 0.8fr;
-    grid-template-rows: 1fr;
+    margin: 0px;
     /*border-style: solid;*/
     /*border-color: #041e42;*/
     box-shadow: 10px 10px 5px 0px #f7f7f9;
