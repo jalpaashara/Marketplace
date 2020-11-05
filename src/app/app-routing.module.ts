@@ -24,8 +24,7 @@ const routes: Routes = [
   {path: 'myaccount', component: MyAccountComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'change-password', component: ChangePasswordComponent},
-  {path: 'product/:id', component: ProductComponent},
-  {path: 'browse/:category', component: BrowseComponent}];
+  {path: 'product/:id', component: ProductComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

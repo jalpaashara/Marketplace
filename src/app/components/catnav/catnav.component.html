@@ -2,22 +2,30 @@
   <div class="_f5jpa">
     <div class="_f5jpd navbar">
       <ul class="_ulack1" routerLinkActive="active">
+        <li>
+          <button class="btn btn-link _af1ck1"  (click)="onCategoryChange(0, 'All Categories')">
+            All Categories
+          </button>
+        </li>
         <li *ngFor="let cat of categories">
-          <button class="btn btn-link _af1ck1"
-                  [routerLink]="['/browse/', cat.name]" [queryParams]="{id: cat.id}">
+          <button class="btn btn-link _af1ck1" (click)="onCategoryChange(cat.id, cat.name)">
             {{cat.name}}
           </button>
         </li>
       </ul>
 
       <div class="dropdownmenu dropdown btn-group">
-        <button class="btn btn-block btn-dark dropdown-toggle" id="CategoriesDropdownMenuButton"
+        <button class="btn btn-block btn-dark dropdown-toggle" style="height: 60px" id="CategoriesDropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Browse by Categories</button>
+          {{selectedValue}}</button>
         <ul aria-labelledby="CategoriesDropdownMenuButton" class="dropdown-menu btn-width">
+          <li>
+            <button type="button" class="btn dropdown-item-text btn-width" (click)="onCategoryChange(0, 'All Categories')">
+              All Categories
+            </button>
+          </li>
           <li class="dropdown-item btn-width" *ngFor="let cat of categories">
-            <button type="button" class="btn dropdown-item-text btn-width"
-                    [routerLink]="['/browse/', cat.name]" [queryParams]="{id: cat.id}">
+            <button type="button" class="btn dropdown-item-text btn-width" (click)="onCategoryChange(cat.id, cat.name)">
               {{cat.name}}
             </button>
           </li>

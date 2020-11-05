@@ -1,41 +1,3 @@
-.grid-container {
-  display: grid;
-  grid-template-areas: "header" "wrapper" "footer";
-  grid-template-rows: 55px 1fr 60px;
-  grid-template-columns: 1fr;
-  min-height: 100vh;
-}
-
-.app-nav { grid-area: header; }
-
-.foot {
-  grid-area: footer;
-  font-family: "Calibri", sans-serif;
-  font-size: 20px;
-  background-color: #041e42;
-  color: white;
-  margin: 10px 0px 0px 0px;
-  padding-top: 12px;
-  text-align: center;
-}
-
-.wrapper{
-  grid-area: wrapper;
-  /*min-width: 1450px;*/
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 50px 1fr;
-  margin-bottom: 20px;
-}
-
-.welcome{
-  margin: 15px 0px 0px 0px;
-  padding-left: 30px;
-  text-transform: capitalize;
-  color: #358ED7;
-  letter-spacing: 1px;
-}
-
 .products{
   padding: 30px 30px 3px 30px;
   margin-top: 0px;
@@ -90,31 +52,38 @@
 }
 
 @media screen and (max-width: 550px) {
-  .wrapper{
-    display: block;
-  }
-
-  .welcome{
-    margin-bottom: 10px;
-  }
-
   .products{
-    padding: 10px 30px 3px 30px;
+    padding: 0px 0px 0px 0px;
     display: grid;
-    margin-top: 10px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: min-content;
-    /*grid-gap: 5px;*/
-  }
-
-}
-
-@media screen and (max-width: 420px) {
-  .products{
-    padding: 10px 30px 3px 30px;
-    display: grid;
-    margin-top: 10px;
+    margin: 25px 0px 30px 0px;
     grid-template-columns: 1fr;
     grid-template-rows: min-content;
+    grid-gap: 25px;
+  }
+
+  .card{
+    width: 100%;
+    height: 12rem;
+  }
+
+  .card-body{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-column-gap: 10px;
+    padding: 0px 5px 0px 0px;
+    margin-bottom: 0px;
+  }
+
+  .card-title{
+    margin-bottom: 15px;
+  }
+
+  .cat-img{
+    height: 152px;
+    margin-bottom: 0px;
+  }
+
+  .h6-font{
+    font-size: 18px;
   }
 }

@@ -1,22 +1,14 @@
-<div class="grid-container">
-  <app-navbar  class="app-nav"></app-navbar>
-
-  <div class="wrapper">
-    <div *ngIf="userDetails!=undefined" class="welcome"><h3>{{category.categoryName}}</h3></div>
-
-    <div class="products" (window:resize)="onResize($event)">
-        <div class="card" *ngFor="let r of product">
-          <div class="card-body">
-            <div *ngIf="r.imageIds[0]!=undefined">
-              <img src="{{url+r.imageIds[0]}}" class="cat-img">
-            </div>
-            <h6 class="card-title h6-font">{{r.prodName}}</h6>
-            <span class="card-text h6-font">Price: ${{r.prodPrice}} </span>
-          </div>
-          <button routerLink="/product/{{r.prodId}}" class="btn btn-danger">Click to know more</button>
+<div class="products" (window:resize)="onResize($event)" [(ngModel)]="product">
+    <div class="card" *ngFor="let r of product" >
+      <div class="card-body">
+        <div *ngIf="r.imageIds[0]!=undefined">
+          <img src="{{url+r.imageIds[0]}}" class="cat-img">
         </div>
+        <div>
+          <h6 class="card-title h6-font">{{r.prodName}}</h6>
+          <span class="card-text h6-font">Price: ${{r.prodPrice}} </span>
+        </div>
+      </div>
+      <button routerLink="/product/{{r.prodId}}" class="btn btn-danger">Click to know more</button>
     </div>
-  </div>
-
-  <footer class="foot">&copy; JAMMR 2020</footer>
 </div>
