@@ -10,8 +10,7 @@ import {MyAccountComponent} from './components/myaccount/my-account.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {ProductComponent} from './components/product/product/product.component';
 import {ChangePasswordComponent} from './components/change-password/change-password.component';
-import {BrowseComponent} from './components/browse/browse.component';
-import {CatnavComponent} from './components/catnav/catnav.component';
+import {SearchComponent} from './components/search/search.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -24,7 +23,8 @@ const routes: Routes = [
   {path: 'myaccount', component: MyAccountComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'change-password', component: ChangePasswordComponent},
-  {path: 'product/:id', component: ProductComponent}];
+  {path: 'product/:id', component: ProductComponent},
+  {path: 'search', component: SearchComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

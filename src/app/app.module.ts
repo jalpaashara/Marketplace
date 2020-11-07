@@ -31,6 +31,8 @@ import {ToastContainerModule, ToastrModule} from 'ngx-toastr';
 import { DragNDropDirective } from './components/sell-product/drag-ndrop.directive';
 import { BrowseComponent } from './components/browse/browse.component';
 import { CatnavComponent } from './components/catnav/catnav.component';
+import { SearchComponent } from './components/search/search.component';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { CatnavComponent } from './components/catnav/catnav.component';
     ChangePasswordComponent,
     DragNDropDirective,
     BrowseComponent,
-    CatnavComponent
+    CatnavComponent,
+    SearchComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -64,7 +67,8 @@ import { CatnavComponent } from './components/catnav/catnav.component';
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    ToastContainerModule
+    ToastContainerModule,
+    FontAwesomeModule
   ],
   providers: [AuthService, DashboardService, UserAccountService],
   bootstrap: [AppComponent]

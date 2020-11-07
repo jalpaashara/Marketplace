@@ -17,8 +17,7 @@ a{
 
 ._f5jpa{
   /*margin: auto;*/
-  position: relative;
-  padding: 16px 0px;
+  padding: 12px 0px;
 }
 
 ._f5jpb{
@@ -33,15 +32,13 @@ a{
 
 ._ulack1{
   padding: 0px;
-  margin: 0px;
   list-style: none;
-  flex-direction: row;
 }
 
 ._af1ck1{
-  padding: 4px 0px;
+  padding: 0px;
   margin: 5px 20px 5px 20px;
-  line-height: 26px;
+  line-height: 23px;
   font-variant-caps: small-caps;
   text-align: left;
   color: midnightblue;
@@ -50,6 +47,7 @@ a{
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   overflow: hidden;
+  font-size: 13px;
 }
 
 ._af1ck1:hover {
@@ -82,11 +80,17 @@ a{
   display: none;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 700px) {
   .bg{
-    background-color: #f7f7f9;
+    background-color: red;
     min-height: 0px;
   }
+
+  .btn-dark{
+    background-color: #041e42;
+    border-color: red;
+  }
+
   ._ulack1>li{
     display: none;
   }

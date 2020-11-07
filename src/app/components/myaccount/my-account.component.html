@@ -42,25 +42,25 @@
 
                 <h6>Contact Information:</h6>
 
-                <div><b>FirstName</b>:&nbsp;{{userDetails.firstName}}&nbsp;&nbsp;
+                <div class="mb-3"><b>FirstName</b>:&nbsp;{{userDetails.firstName}}&nbsp;&nbsp;
                   <button #editFN class="btn btn-outline-danger" (click)="editClickFN()" value="firstName" style="height: 30px;padding:2px 12px">Edit</button>
-                </div><br>
+                </div>
                 <div *ngIf="update['firstName']" class="form-group">
                   <input type="text" class="form-control" name="firstName" placeholder="Enter New FirstName" style="margin-bottom: 5px; width: 500px" #newFirstName required>
                   <button class="btn btn-warning"  (click)="updateUserInfo('firstName', newFirstName.value)">Update</button>&nbsp;&nbsp;
                   <button class="btn btn-success" (click)="cancelClick()">Cancel</button>
                 </div>
 
-                <div><b>LastName</b>:&nbsp;{{userDetails.lastName}}&nbsp;&nbsp;
+                <div class="mb-3"><b>LastName</b>:&nbsp;{{userDetails.lastName}}&nbsp;&nbsp;
                   <button #editLN class="btn btn-outline-danger" (click)="editClickLN()" value="lastName" style="height: 30px;padding:2px 12px">Edit</button>
-                </div><br>
+                </div>
                 <div *ngIf="update['lastName']" class="form-group">
                   <input type="text" class="form-control" placeholder="Enter New LastName" style="margin-bottom: 5px; width: 500px" #newlastName required>
                   <button class="btn btn-warning" (click)="updateUserInfo('lastName', newlastName.value)" >Update</button>&nbsp;&nbsp;
                   <button class="btn btn-success" (click)="cancelClick()">Cancel</button>
                 </div>
 
-                <div><b>Phone</b>:&nbsp;<span *ngIf="userDetails.phone==' '">Not Available</span>
+                <div class="mb-3"><b>Phone</b>:&nbsp;<span *ngIf="userDetails.phone==' '">Not Available</span>
                   {{userDetails.phone}}&nbsp;&nbsp;
                   <button #editP class="btn btn-outline-danger" (click)="editClickP()" value="phone" style="height: 30px;padding:2px 12px">Edit</button>
                 <div *ngIf="update['phone']" class="form-group">
@@ -68,7 +68,7 @@
                   <button class="btn btn-warning" (click)="updateUserInfo('phone', newPhone.value)" >Update</button>&nbsp;&nbsp;
                   <button class="btn btn-success" (click)="cancelClick()">Cancel</button>
                 </div>
-              </div><br><br>
+              </div>
 
                 <div>
                   <button class="btn btn-danger" (click)="DeleteUserAccount()">Delete Account</button>

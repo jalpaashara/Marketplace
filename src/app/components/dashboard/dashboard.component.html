@@ -1,8 +1,10 @@
 <div class="grid-container">
   <app-navbar  class="app-nav"></app-navbar>
-
   <div class="wrapper">
-    <div *ngIf="userDetails!=undefined" class="welcome"><h3>Welcome {{userDetails.firstName}},</h3></div>
+    <div *ngIf="userDetails!=undefined" class="welcome">
+      <div><h3>Welcome {{userDetails.firstName}},</h3></div>
+      <div class="search"><app-search></app-search></div>
+    </div>
     <div class="cat">
       <app-catnav (catEvent)="changeEventHandler($event)"></app-catnav>
     </div>
