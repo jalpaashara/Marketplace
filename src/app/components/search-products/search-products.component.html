@@ -1,0 +1,15 @@
+<div class="grid-container">
+  <app-navbar  class="app-nav"></app-navbar>
+  <div class="wrapper">
+    <div *ngIf="userDetails!=undefined" class="welcome">
+      <div><h3>Welcome {{userDetails.firstName}},</h3></div>
+      <div class="search"><app-search></app-search></div>
+    </div>
+    <div class="grid-row">
+      <app-browse [catId]="selectedCat"></app-browse>
+    </div>
+  </div>
+
+  <footer class="foot">&copy; JAMMR 2020</footer>
+
+</div>

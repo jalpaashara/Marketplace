@@ -33,6 +33,7 @@ import { BrowseComponent } from './components/browse/browse.component';
 import { CatnavComponent } from './components/catnav/catnav.component';
 import { SearchComponent } from './components/search/search.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { SearchProductsComponent } from './components/search-products/search-products.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
     DragNDropDirective,
     BrowseComponent,
     CatnavComponent,
-    SearchComponent
+    SearchComponent,
+    SearchProductsComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

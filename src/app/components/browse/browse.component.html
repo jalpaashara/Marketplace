@@ -1,4 +1,11 @@
-<div class="products" (window:resize)="onResize($event)" [(ngModel)]="product">
+<div *ngIf="routeURL=='search'" class="searchResult">
+  <div>
+    <a href="javascript:void(0);" routerLink="/dashboard">Dashboard</a>
+     &nbsp; > &nbsp; Search
+  </div>
+  Search result for {{param.q}}
+</div>
+<div class="products" (window:resize)="onResize($event)" [(ngModel)]="product" ngDefaultControl>
     <div class="card" *ngFor="let r of product" >
       <div class="card-body">
         <div *ngIf="r.imageIds[0]!=undefined">

@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth/auth.service';
+import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user';
-import {Router} from '@angular/router';
 import {UserDetails} from '../../models/user-details';
-import {UserAccountService} from '../../services/user/user-account.service';
 import {Product} from '../../models/product';
+import {AuthService} from '../../services/auth/auth.service';
+import {Router} from '@angular/router';
+import {UserAccountService} from '../../services/user/user-account.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-search-products',
+  templateUrl: './search-products.component.html',
+  styleUrls: ['./search-products.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class SearchProductsComponent implements OnInit {
+
   userData: User;
   private isLoggedIn: boolean;
   userDetails: UserDetails;
@@ -28,13 +29,16 @@ export class DashboardComponent implements OnInit {
       this.isLoggedIn = res;
     });
     if (this.isLoggedIn) {
-      if (this.userAccountService.getCurrUserDetails() != undefined) {
+      this.authService.userData.subscribe((res) => {
+        this.userData = res;
+      });
+
+      if (this.userAccountService.getCurrUserDetails() !== undefined) {
         this.userDetails = this.userAccountService.getCurrUserDetails();
       } else {
         this.userAccountService.currUser
           .subscribe(
             (usr) => {
-              console.log(usr);
               this.userDetails = usr;
             },
             error => {console.log(error); });
@@ -43,7 +47,9 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl('home');
     }
   }
+
   changeEventHandler($event: number) {
     this.selectedCat = $event;
   }
+
 }

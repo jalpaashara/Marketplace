@@ -69,4 +69,11 @@ export class ProductService {
     const url = this.url + '/browse/' + categoryId;
     return this.http.get(url);
   }
+
+  seacrhProducts(searchStr) {
+    console.log(searchStr);
+    const url = this.url + '/search?q='+searchStr.q;
+    console.log('url=',url);
+    return this.http.get(url);
+  }
 }

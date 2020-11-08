@@ -17,12 +17,6 @@ export class UserAccountService {
   constructor(public http: HttpClient) { }
 
   setUserDetails(user) {
-    /*const u = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      phone: ' '
-    };*/
     const url = environment.api + '/user';
     return this.http.post(url, user);
   }

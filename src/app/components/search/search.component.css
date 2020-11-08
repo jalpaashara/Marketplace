@@ -16,6 +16,7 @@
   /*transition: width 0.4s linear;*/
   padding: 0px 12px;
   margin-top: -10px;
+  width: 85%;
 }
 
 /*.searchbar:hover > .search_input{

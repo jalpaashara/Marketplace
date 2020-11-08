@@ -1,6 +1,13 @@
-<form class="form-inline">
+<form class="form-inline" role="search" [formGroup]="searchForm" (ngSubmit)='onSubmitSearch()'>
   <div class="searchbar">
-    <input class="search_input" type="search" placeholder="Search.." aria-label="Search">
-    <button class="btn btn-sm searchbutton" type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
+    <input class="search_input" type="search" placeholder="Search.." aria-label="Search" formControlName="searchStr"
+           [ngClass]="{ 'is-invalid': (formVal.searchStr.errors) }"/>
+    <button class="btn btn-sm searchbutton" [disabled]="formVal.searchStr.invalid">
+      <fa-icon [icon]="faSearch"></fa-icon>
+    </button>
+    <div [hidden]="formVal.searchStr.valid" class="invalid-feedback form-group"
+         style="color: #f0fff0; margin-bottom: 20px;">
+      <div *ngIf="formVal.searchStr.invalid && formVal.searchStr.errors.minlength">Minimum 3 letter search string required</div>
+    </div>
   </div>
 </form>

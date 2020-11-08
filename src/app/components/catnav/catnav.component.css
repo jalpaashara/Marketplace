@@ -61,7 +61,7 @@ a{
   left: 51%;
   right: 51%;
   bottom: 0;
-  background: green;
+  background: #ea0046;
   height: 4px;
   -webkit-transition-property: left, right;
   transition-property: left, right;
@@ -82,13 +82,14 @@ a{
 
 @media screen and (max-width: 700px) {
   .bg{
-    background-color: red;
+    background-color: #ea0046;
     min-height: 0px;
   }
 
   .btn-dark{
+    border-style: none none solid none;
     background-color: #041e42;
-    border-color: red;
+    border-color: #EA0046;
   }
 
   ._ulack1>li{

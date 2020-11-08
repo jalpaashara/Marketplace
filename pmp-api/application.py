@@ -119,13 +119,42 @@ def getCategoryById(categoryId):
     finally:
         cursor.close()
 
+@application.route('/search', methods=['GET'])
+def search():
+    try:
+        name = request.args.get('q')
+        print("search string: ", name)
+        cursor = mysql.connection.cursor()
+        select_stmt = """select id, name, categoryId, userId, description, price,
+                         datediff(current_date(), createdDate) as days
+                         from products WHERE name LIKE %(name)s
+                         order by modifiedDate desc"""
+        search_string = "%" + name + "%"
+        rows = cursor.execute(select_stmt, {'name': search_string})
+        print("rows: ", rows)
+        rows_data = cursor.fetchall()
+        # products = []
+        # for row in rows_data:
+        #     products.append(row)
+        # print(products)
+        resp = {'totalRecords': rows, 'products': rows_data}
+        return jsonify(resp)
+    except Exception as e:
+        print(e)
+    finally:
+        if ('cursor' in locals()):
+            cursor.close()
+
+
 @application.route('/products', methods=['GET'])
 def getProducts():
     try:
         # conn = mysql.connect()
         # cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor = mysql.connection.cursor()
-        cursor.execute("select id, name, categoryId, userId, description, price, datediff(current_date(), createdDate) as days  from products order by modifiedDate desc")
+        cursor.execute("select id, name, categoryId, userId, description, price, "
+                       "datediff(current_date(), createdDate) as days  "
+                       "from products order by modifiedDate desc")
         rows = cursor.fetchall()
         products = []
         i=0
@@ -166,7 +195,10 @@ def getProductById(productId):
     if (request.method == 'GET'):
         try:
             cursor = mysql.connection.cursor()
-            select_stmt = "SELECT id, name, categoryId, userId, description, price, datediff(current_date(), createdDate) as days FROM products WHERE id = %(prodId)s"
+            select_stmt = "SELECT id, name, categoryId, userId, description, price, " \
+                          "datediff(current_date(), createdDate) as days FROM products " \
+                          "WHERE id = %(prodId)s " \
+                          "order by modifiedDate desc"
             cursor.execute(select_stmt, {'prodId': productId})
             product = cursor.fetchone()
             categories = json.loads(getCategoryById(product['categoryId']).data)
@@ -339,7 +371,7 @@ def getProductsByCategoryId(categoryId):
             select_stmt = """SELECT id, name, categoryId, userId, description, price,
                                   datediff(current_date(), createdDate) as days
                              FROM products WHERE categoryId = %(categoryId)s
-                             ORDER BY days"""
+                             ORDER BY modifiedDate desc"""
             cursor.execute(select_stmt, {'categoryId': categoryId})
             rows = cursor.fetchall()
             products = []

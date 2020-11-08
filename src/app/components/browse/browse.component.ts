@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, OnChanges, SimpleChange} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {UserAccountService} from '../../services/user/user-account.service';
 import {ProductService} from '../../services/product/product.service';
 import {User} from '../../models/user';
@@ -21,13 +21,19 @@ export class BrowseComponent implements OnInit, OnChanges {
   userDetails: UserDetails;
   product: Product[] = [];
   url = environment.api + '/image/';
+  routeURL: string;
+  param;
+  queryParamEntries;
 
   constructor(public authService: AuthService,
               public router: Router,
               public userAccountService: UserAccountService,
-              private productService: ProductService) { }
+              private productService: ProductService,
+              public activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.routeURL = this.activatedRoute.routeConfig.path;
+    this.param = this.activatedRoute.snapshot.queryParams;
     this.authService.isLoggedIn.subscribe((res) => {
       this.isLoggedIn = res;
     });
@@ -47,10 +53,18 @@ export class BrowseComponent implements OnInit, OnChanges {
             },
             error => {console.log(error); });
       }
+
+      if (this.routeURL === 'dashboard') {
+        console.log('You are in Dashboard');
+        this.getAllProducts();
+      } else if (this.routeURL === 'search') {
+        console.log('You are in Search');
+        this.searchProducts();
+      }
+
     } else {
       this.router.navigateByUrl('home');
     }
-
   }
 
   getProductsByCategory(categoryId) {
@@ -59,28 +73,7 @@ export class BrowseComponent implements OnInit, OnChanges {
       .subscribe((res) => {
         // console.log(res);
         const p = res;
-        for (const prod of p.products) {
-          // tslint:disable-next-line:one-variable-per-declaration prefer-const
-          let imgIds: number[] = [], temp, i = -1;
-          this.productService.getProdAllImagesId(prod.id)
-            .pipe(map(im => im.images.imageIds))
-            .subscribe((imgs) => {
-              temp = imgs;
-              for (const y of temp) {
-                imgIds.push(y);
-              }
-            });
-          this.product.push({
-            categoryId: prod.categoryId,
-            days: prod.days,
-            prodDesc: prod.description,
-            prodId: prod.id,
-            prodName: prod.name,
-            prodPrice: prod.price,
-            userId: prod.userId,
-            imageIds: imgIds
-          });
-        }
+        this.setProducts(p);
       });
   }
 
@@ -90,28 +83,7 @@ export class BrowseComponent implements OnInit, OnChanges {
       .subscribe(async (res) => {
         // console.log(res);
         const p = res;
-        for (const prod of p.products) {
-          // tslint:disable-next-line:one-variable-per-declaration prefer-const
-          let imgIds: number[] = [], temp, i = -1;
-          this.productService.getProdAllImagesId(prod.id)
-            .pipe(map(im => im.images.imageIds))
-            .subscribe((imgs) => {
-              temp = imgs;
-              for (const y of temp) {
-                imgIds.push(y);
-              }
-            });
-          this.product.push({
-            categoryId: prod.categoryId,
-            days: prod.days,
-            prodDesc: prod.description,
-            prodId: prod.id,
-            prodName: prod.name,
-            prodPrice: prod.price,
-            userId: prod.userId,
-            imageIds: imgIds
-          });
-        }
+        this.setProducts(p);
       });
   }
 
@@ -122,10 +94,46 @@ export class BrowseComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     const id = Number(JSON.stringify(changes.catId.currentValue));
-    if (id === 0 || isNaN(id)) {
-      this.getAllProducts();
-    } else {
-      this.getProductsByCategory(id);
+
+    if (this.routeURL === 'dashboard') {
+      if (id === 0 || isNaN(id)) {
+        this.getAllProducts();
+      } else {
+        this.getProductsByCategory(id);
+      }
+    }
+  }
+
+  searchProducts() {
+    this.product = [];
+    this.productService.seacrhProducts(this.param).subscribe((res) => {
+      const p = res;
+      this.setProducts(p);
+    });
+  }
+
+  private setProducts(p: any) {
+    for (const prod of p.products) {
+      // tslint:disable-next-line:one-variable-per-declaration prefer-const
+      let imgIds: number[] = [], temp, i = -1;
+      this.productService.getProdAllImagesId(prod.id)
+        .pipe(map(im => im.images.imageIds))
+        .subscribe((imgs) => {
+          temp = imgs;
+          for (const y of temp) {
+            imgIds.push(y);
+          }
+        });
+      this.product.push({
+        categoryId: prod.categoryId,
+        days: prod.days,
+        prodDesc: prod.description,
+        prodId: prod.id,
+        prodName: prod.name,
+        prodPrice: prod.price,
+        userId: prod.userId,
+        imageIds: imgIds
+      });
     }
   }
 }

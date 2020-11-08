@@ -33,7 +33,7 @@
   /*min-width: 1450px;*/
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas: "welcome welcome welcome" "cat grid-row grid-row";
+  grid-template-areas: "welcome" "grid-row" "grid-row";
   /*grid-template-rows: 3% 9% 88%;*/
   /*margin-top: 50px;*/
   background-color: #f7f7f9;
@@ -56,7 +56,7 @@
 
 .grid-row{
   grid-area: grid-row;
-  margin: 0px 5px 25px 5px;
+  margin: 0px;
   display: grid;
   /*grid-template-columns: 1fr;*/
   grid-template-rows: 1fr;
