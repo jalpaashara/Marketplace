@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchForm = new FormGroup({
-      searchStr: new FormControl('', [Validators.minLength(3)])
+      searchStr: new FormControl('')
     });
   }
 

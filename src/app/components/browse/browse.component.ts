@@ -24,6 +24,7 @@ export class BrowseComponent implements OnInit, OnChanges {
   routeURL: string;
   param;
   queryParamEntries;
+  prodLength: number;
 
   constructor(public authService: AuthService,
               public router: Router,
@@ -108,6 +109,7 @@ export class BrowseComponent implements OnInit, OnChanges {
     this.product = [];
     this.productService.seacrhProducts(this.param).subscribe((res) => {
       const p = res;
+      this.prodLength =  p['totalRecords'];
       this.setProducts(p);
     });
   }

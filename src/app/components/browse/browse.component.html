@@ -4,6 +4,10 @@
      &nbsp; > &nbsp; Search
   </div>
   Search result for {{param.q}}
+  <div *ngIf="prodLength==0" style="margin-top: 10px; color: #38424c;">
+    <b>Try a new search</b><br>
+    Change your search filters, check your spelling, or try a less specific search
+  </div>
 </div>
 <div class="products" (window:resize)="onResize($event)" [(ngModel)]="product" ngDefaultControl>
     <div class="card" *ngFor="let r of product" >
