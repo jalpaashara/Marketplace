@@ -9,7 +9,8 @@
     Change your search filters, check your spelling, or try a less specific search
   </div>
 </div>
-<div class="products" (window:resize)="onResize($event)" [(ngModel)]="product" ngDefaultControl>
+<div class="products" (window:resize)="onResize($event)" [(ngModel)]="product" ngDefaultControl
+     #prodRef>
     <div class="card" *ngFor="let r of product" >
       <div class="card-body">
         <div *ngIf="r.imageIds[0]!=undefined">

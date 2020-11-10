@@ -18,9 +18,8 @@ export class MyAccountComponent implements OnInit {
   private isLoggedIn: boolean;
   userDetails: UserDetails = new UserDetails();
   update: any = {
-    firstName: false,
-    lastName: false,
-    phone: false
+    userProfile: true,
+    myListings: false
   };
 
   constructor(public authService: AuthService,
@@ -55,65 +54,6 @@ export class MyAccountComponent implements OnInit {
     }
   }
 
-  editClickFN() {
-    this.update = {
-      firstName: true,
-      lastName: false,
-      phone: false,
-    };
-  }
-
-  editClickLN() {
-    this.update = {
-      firstName: false,
-      lastName: true,
-      phone: false,
-    };
-  }
-
-  editClickP() {
-    this.update = {
-      firstName: false,
-      lastName: false,
-      phone: true,
-    };
-  }
-
-  cancelClick() {
-    this.update = {
-      firstName: false,
-      lastName: false,
-      phone: false,
-    };
-  }
-
-  updateUserInfo(name: string, value: string) {
-    const id = this.userDetails.id;
-    let data;
-    if (name === 'firstName') {
-      data = {firstName: value };
-      this.userDetails.firstName = value;
-    } else if (name === 'lastName') {
-      data = {lastName: value };
-      this.userDetails.lastName = value;
-    } else {
-        data = {phone: value };
-        this.userDetails.phone = value;
-    }
-    this.userAccountService.updateUserInfo(id, data)
-      .subscribe(res => {
-        console.log(res);
-        this.userAccountService.setCurrUserDetails(this.userDetails);
-        this.toastr.success(name + ' successfully updated.');
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['myaccount']);
-      }, error => {
-        this.toastr.error('Something went wrong! Please try again.');
-      });
-
-  }
-
   SignOut() {
     this.authService.SignOut()
       .then(
@@ -127,27 +67,18 @@ export class MyAccountComponent implements OnInit {
       );
   }
 
-  DeleteUserAccount() {
-    this.authService.DeleteUser()
-      .then(
-        res => {
-          this.userAccountService.deleteUserAccount(this.userDetails.id).subscribe(
-            del => {
+  goToUserProfile() {
+      this.update = {
+        userProfile: true,
+        myListings: false
+      };
+  }
 
-              this.router.navigateByUrl('home');
-              this.toastr.success('We are sad to see yo go!', ' Your account has been deleted!');
-            },
-            err => {
-              console.log(err);
-              this.toastr.error('Something went wrong! Please try again.');
-            }
-          );
-        },
-        err => {
-          console.log(err);
-          this.toastr.error(err.message);
-        }
-      );
+  goToMyListings() {
+    this.update = {
+      userProfile: false,
+      myListings: true
+    };
   }
 
 }

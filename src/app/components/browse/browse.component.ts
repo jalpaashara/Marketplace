@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnChanges, SimpleChange} from '@angular/core';
+import {Component, Input, OnInit, OnChanges, SimpleChange, ViewChild, ElementRef, AfterViewInit, Renderer2} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {UserAccountService} from '../../services/user/user-account.service';
@@ -14,7 +14,7 @@ import {map} from 'rxjs/operators';
   templateUrl: './browse.component.html',
   styleUrls: ['./browse.component.css']
 })
-export class BrowseComponent implements OnInit, OnChanges {
+export class BrowseComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() catId: number;
   userData: User;
   private isLoggedIn: boolean;
@@ -25,26 +25,25 @@ export class BrowseComponent implements OnInit, OnChanges {
   param;
   queryParamEntries;
   prodLength: number;
+  @ViewChild('prodRef') prodRef: ElementRef;
 
   constructor(public authService: AuthService,
               public router: Router,
               public userAccountService: UserAccountService,
               private productService: ProductService,
-              public activatedRoute: ActivatedRoute) {}
+              public activatedRoute: ActivatedRoute,
+              private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.routeURL = this.activatedRoute.routeConfig.path;
+    console.log(this.routeURL);
     this.param = this.activatedRoute.snapshot.queryParams;
     this.authService.isLoggedIn.subscribe((res) => {
       this.isLoggedIn = res;
     });
 
     if (this.isLoggedIn) {
-      this.authService.userData.subscribe((res) => {
-        this.userData = res;
-      });
-
-      if (this.userAccountService.getCurrUserDetails() !== undefined) {
+      if (this.userAccountService.getCurrUserDetails() != undefined) {
         this.userDetails = this.userAccountService.getCurrUserDetails();
       } else {
         this.userAccountService.currUser
@@ -61,11 +60,32 @@ export class BrowseComponent implements OnInit, OnChanges {
       } else if (this.routeURL === 'search') {
         console.log('You are in Search');
         this.searchProducts();
+      } else if (this.routeURL === 'myaccount') {
+        console.log('You are in My Account');
+        this.getProductsByUser();
+
       }
 
     } else {
       this.router.navigateByUrl('home');
     }
+  }
+
+  ngAfterViewInit() {
+    if (this.routeURL === 'myaccount') {
+      this.renderer.setStyle(this.prodRef.nativeElement, 'padding-left', '0px');
+
+    }
+  }
+
+  getProductsByUser() {
+    this.product = [];
+    this.productService.getProductsByUserId(this.userDetails.id)
+      .subscribe((res) => {
+        // console.log(res);
+        const p = res;
+        this.setProducts(p);
+      });
   }
 
   getProductsByCategory(categoryId) {

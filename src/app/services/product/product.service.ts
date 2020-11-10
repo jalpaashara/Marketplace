@@ -72,8 +72,12 @@ export class ProductService {
 
   seacrhProducts(searchStr) {
     console.log(searchStr);
-    const url = this.url + '/search?q='+searchStr.q;
-    console.log('url=',url);
+    const url = this.url + '/search?q=' + searchStr.q;
+    return this.http.get(url);
+  }
+
+  getProductsByUserId(userId): Observable<any>  {
+    const url = this.url + '/user/' + userId + '/products';
     return this.http.get(url);
   }
 }

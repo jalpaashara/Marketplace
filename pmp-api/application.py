@@ -311,6 +311,28 @@ def signup():
     finally:
      cursor.close()
 
+
+@application.route('/user/<int:userId>/products', methods=['GET'])
+def getProductsByUser(userId):
+    if (request.method == 'GET'):
+        try:
+            cursor = mysql.connection.cursor()
+            select_stmt = """SELECT id, name, categoryId, userId, description, price,
+                                  datediff(current_date(), createdDate) as days
+                             FROM products WHERE userId = %(userId)s
+                             ORDER BY modifiedDate desc"""
+            rows = cursor.execute(select_stmt, {'userId': userId})
+
+
+            products = cursor.fetchall()
+            resp = {'totalRecords': rows, 'products': products}
+            return jsonify(resp)
+        except Exception as e:
+            print(e)
+        finally:
+            cursor.close()
+
+
 @application.route('/product/<int:productId>/image', methods=['POST', 'GET'])
 def productImages(productId):
     if (request.method == 'POST'):
