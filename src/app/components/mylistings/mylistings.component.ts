@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mylistings.component.css']
 })
 export class MylistingsComponent implements OnInit {
+  component = 'mylistings';
+  allCategory = 0;
 
   constructor() { }
 

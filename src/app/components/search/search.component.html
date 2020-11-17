@@ -5,9 +5,5 @@
     <button class="btn btn-sm searchbutton" [disabled]="formVal.searchStr.invalid">
       <fa-icon [icon]="faSearch"></fa-icon>
     </button>
-    <div [hidden]="formVal.searchStr.valid" class="invalid-feedback form-group"
-         style="color: #f0fff0; margin-bottom: 20px;">
-      <div *ngIf="formVal.searchStr.invalid && formVal.searchStr.errors.minlength">Minimum 3 letter search string required</div>
-    </div>
   </div>
 </form>

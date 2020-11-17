@@ -2,26 +2,31 @@
 <app-navbar></app-navbar>
 <div class="container-fluid">
 
-  <div class="row" style="margin-top: 60px">
+  <div class="row">
     <!-- Sidebar navigation -->
     <nav class="col-md-2 d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-dir">
           <li class="nav-item">
-            <a class="nav-link active" (click)="goToUserProfile()" >
+            <button class="btn btn-link _af1ck1" (click)="goToUserProfile()" >
               User Profile
-            </a>
+            </button>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="goToMyListings()">
+            <button class="btn btn-link _af1ck1" (click)="goToMyListings()">
               My Listings
-            </a>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-link _af1ck1" (click)="goToMyFavorites()">
+              My Favorites
+            </button>
           </li>
           <!-- Calling SignOut() Api from AuthService -->
           <li class="nav-item">
-            <a class="nav-link" (click)="SignOut()">
+            <button class="btn btn-link _af1ck1" (click)="SignOut()">
               Log out
-            </a>
+            </button>
           </li>
         </ul>
       </div>
@@ -32,6 +37,7 @@
       <div class="inner-adjust">
         <div *ngIf="update.userProfile" class="ml-sm-auto px-4"><app-user-profile></app-user-profile></div>
         <div *ngIf="update.myListings"><app-mylistings></app-mylistings></div>
+        <div *ngIf="update.myFavorites"><app-myfavorites></app-myfavorites></div>
       </div>
     </main>
 

@@ -19,7 +19,8 @@ export class MyAccountComponent implements OnInit {
   userDetails: UserDetails = new UserDetails();
   update: any = {
     userProfile: true,
-    myListings: false
+    myListings: false,
+    myFavorites: false
   };
 
   constructor(public authService: AuthService,
@@ -70,15 +71,24 @@ export class MyAccountComponent implements OnInit {
   goToUserProfile() {
       this.update = {
         userProfile: true,
-        myListings: false
+        myListings: false,
+        myFavorites: false
       };
   }
 
   goToMyListings() {
     this.update = {
       userProfile: false,
-      myListings: true
+      myListings: true,
+      myFavorites: false
     };
   }
 
+  goToMyFavorites() {
+    this.update = {
+      userProfile: false,
+      myListings: false,
+      myFavorites: true
+    };
+  }
 }

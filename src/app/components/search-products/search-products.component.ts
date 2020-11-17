@@ -18,6 +18,7 @@ export class SearchProductsComponent implements OnInit {
   userDetails: UserDetails;
   product: Product[] = [];
   selectedCat = 0;
+  component = 'search';
 
   constructor(public authService: AuthService,
               public router: Router,

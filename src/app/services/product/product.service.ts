@@ -80,4 +80,19 @@ export class ProductService {
     const url = this.url + '/user/' + userId + '/products';
     return this.http.get(url);
   }
+
+  getCurrUserFavProds(userId) {
+    const url = this.url + '/user/' + userId + '/favProducts';
+    return this.http.get(url);
+  }
+
+  addToFavorites(userId, prodId) {
+    const url = this.url + '/user/' + userId + '/favProduct/' + prodId;
+    return this.http.post(url, userId, prodId);
+  }
+
+  removeFromFavorites(userId, prodId) {
+    const url = this.url + '/user/' + userId + '/favProduct/' + prodId;
+    return this.http.delete(url);
+  }
 }

@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   userDetails: UserDetails;
   product: Product[] = [];
   selectedCat = 0;
+  component = 'dashboard';
 
   constructor(public authService: AuthService,
               public router: Router,

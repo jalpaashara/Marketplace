@@ -7,4 +7,5 @@ export interface Product {
   categoryId: number;
   userId: number;
   imageIds: number[];
+  isFav: boolean;
 }

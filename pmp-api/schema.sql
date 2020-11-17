@@ -33,7 +33,7 @@ INSERT INTO `category` ( `name`, `img`) VALUES
     ('Home & Kitchen appliances','https://asset20.ckassets.com/blog/wp-content/uploads/sites/5/2019/12/Home-Kitchen-Appliances-to-buy-from-BigBasket.jpg'),
 	('Computers & accessories','https://2pwgqm3nczsg1a5kw72u2pcf-wpengine.netdna-ssl.com/wp-content/uploads/2019/03/laptop-accessories.jpg'),
     ('Phones & accessories','https://image-us.samsung.com/us/smartphones/galaxy-s20/galaxy-s20-plus/Cloud-Blue/Y2_Lockup_CloudBlue-1600x1200.jpg?$product-details-jpg'),
-	('Books & study materail','https://miro.medium.com/max/1400/1*S81O15rjKfG-BFdnNC6-GQ.jpeg'),
+	('Books & study material','https://miro.medium.com/max/1400/1*S81O15rjKfG-BFdnNC6-GQ.jpeg'),
     ('Automobile & accessories','https://www.ikea.com/my/en/images/products/lillabo-toy-car__0175385_PE328763_S5.JPG'),
 	('Sports accessories','https://baltimorefitnessforwomen.com/wp-content/uploads/2017/10/Clipart-Sports-Equipment-08.jpg'),
     ('Travel pass','https://atlas-content-cdn.pixelsquid.com/stock-images/metro-card-RJEZMZD-600.jpg'),
@@ -53,8 +53,6 @@ CREATE TABLE IF NOT EXISTS `products` (
   `createdDate` timestamp DEFAULT current_timestamp,
   `modifiedDate` timestamp DEFAULT current_timestamp,
   PRIMARY KEY (`id`),
-  KEY `FK_products_users` (`userId`),
-  KEY `FK_products_category` (`categoryId`),
   CONSTRAINT `FK_products_category` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
@@ -76,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `product_image` (
   `imageId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `productId` int(11) NOT NULL DEFAULT '0',
   `productImage` longblob NOT NULL,
-  PRIMARY KEY `image_id` (`imageId`)
+  PRIMARY KEY `image_id` (`imageId`),
   CONSTRAINT FK_ProductImage foreign key (productId) references products(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -116,3 +114,33 @@ INSERT INTO `users` (`firstName`, `lastName`, `email`, `phone`) VALUES
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+-- Dumping structure for table pace_mp.fav_products
+CREATE TABLE IF NOT EXISTS `fav_products` (
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `created_date` timestamp DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`product_id`,`user_id`),
+  CONSTRAINT `FK_fav_products_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+  CONSTRAINT `FK_fav_products_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table pace_mp.fav_products: ~6 rows (approximately)
+/*!40000 ALTER TABLE `fav_products` DISABLE KEYS */;
+INSERT INTO `fav_products` (`user_id`, `product_id`, `created_date`) VALUES
+	(1, 1, '2020-09-22 22:22:01'),
+	(1, 2, '2020-09-25 15:35:11'),
+	(1, 3, '2020-09-25 15:35:28'),
+	(2, 3, '2020-09-25 15:35:39'),
+	(2, 7, '2020-09-22 22:24:52'),
+	(1, 9, '2020-09-25 15:25:59');
+/*!40000 ALTER TABLE `fav_products` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
