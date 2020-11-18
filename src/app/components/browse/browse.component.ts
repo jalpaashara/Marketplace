@@ -193,6 +193,10 @@ export class BrowseComponent implements OnInit, OnChanges, AfterViewInit {
           const index = this.product.indexOf(product);
           this.product[index].isFav = false;
           this.toastr.success('Item Removed from Favirotes');
+          if (this.component === 'myfavorites') {
+            this.product.splice(index, 1);
+            this.prodLength--;
+          }
 
         }, (error) => {
           this.toastr.error('Could not remove item from Favorites. Please try after sometime', error.name);
