@@ -414,7 +414,7 @@ def favProduct(userId, productId):
             del_ex = cursor.execute(delete_stmt, {'userId': userId, 'productId': productId})
             print(del_ex)
             mysql.connection.commit()
-            resp = jsonify({'msg': 'Success'})
+            resp = jsonify({'isFav':False})
 
         return resp
     except Exception as e:
