@@ -32,7 +32,6 @@
   grid-area: wrapper;
   /*min-width: 1450px;*/
   display: grid;
-  grid-template-columns: 1fr;
   grid-template-areas: "welcome welcome welcome" "cat grid-row grid-row";
   /*grid-template-rows: 3% 9% 88%;*/
   /*margin-top: 50px;*/

@@ -8,6 +8,8 @@ import {UserDetails} from '../../../models/user-details';
 import {ToastrService} from 'ngx-toastr';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {faHeart as farHeart} from '@fortawesome/free-regular-svg-icons';
+import {faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product',
@@ -25,6 +27,8 @@ export class ProductComponent implements OnInit {
   public userDetails: UserDetails;
   spin = false;
   enableMsg = false;
+  farHeartIcon = farHeart;
+  fasHeartIcon = fasHeart;
 
   constructor(public authService: AuthService,
               public route: ActivatedRoute,
@@ -39,16 +43,13 @@ export class ProductComponent implements OnInit {
     });
     if (this.isLoggedIn) {
       this.productID = this.route.snapshot.params.id;
-      this.getProductById();
-      this.getProductImage();
-
       if (this.userAccountService.getCurrUserDetails() !== undefined) {
         this.userDetails = this.userAccountService.getCurrUserDetails();
       } else {
         this.userAccountService.currUser
           .subscribe(
             (usr) => {
-              // console.log(usr);
+              console.log(usr);
               this.userDetails = usr;
             },
             error => {console.log(error); });
@@ -56,6 +57,8 @@ export class ProductComponent implements OnInit {
     } else {
       this.router.navigateByUrl('home');
     }
+    this.getProductById();
+    this.getProductImage();
   }
 
   getProductById() {
@@ -67,9 +70,21 @@ export class ProductComponent implements OnInit {
           this.router.navigateByUrl('dashboard');
         }
       });
+    this.isFavorite();
+
   }
 
-
+ isFavorite() {
+   this.prodService.getFavProdByUser(this.userDetails.id, this.productID)
+     .subscribe((isFav) => {
+       console.log(isFav);
+       if (isFav['isFav'] === 0) {
+         this.productData.isFav = false;
+       } else {
+         this.productData.isFav = true;
+       }
+     });
+ }
  getProductImage() {
     this.prodService.getProdAllImagesId(this.productID)
       .subscribe(
@@ -139,5 +154,30 @@ export class ProductComponent implements OnInit {
             this.enableMsg = true;
           });
       });
+  }
+
+  favorites() {
+    if (!this.productData.isFav) {
+      this.prodService.addToFavorites(this.userDetails.id, this.productID)
+        .subscribe(res => {
+          this.productData.isFav = this.isFavorite();
+          this.toastr.success('You can see it in My Account -> Profile -> My Favorites',
+            'You have marked an item as favorite.');
+
+          }, (error) => {
+            this.toastr.error('Could not Favorite the item. Please try after sometime');
+          }
+        );
+    } else {
+      this.prodService.removeFromFavorites(this.userDetails.id, this.productID)
+        .subscribe(res => {
+          this.productData.isFav = this.isFavorite();
+          this.toastr.success('Item Removed from Favorites!');
+
+          }, (error) => {
+            this.toastr.error('Could not remove item from Favorites. Please try after sometime');
+          }
+        );
+    }
   }
 }

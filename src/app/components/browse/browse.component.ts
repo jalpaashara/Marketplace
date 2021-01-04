@@ -192,7 +192,7 @@ export class BrowseComponent implements OnInit, OnChanges, AfterViewInit {
           this.currUserFavProdsSet.delete(product.prodId);
           const index = this.product.indexOf(product);
           this.product[index].isFav = false;
-          this.toastr.success('Item Removed from Favirotes');
+          this.toastr.success('Item Removed from Favorites');
           if (this.component === 'myfavorites') {
             this.product.splice(index, 1);
             this.prodLength--;

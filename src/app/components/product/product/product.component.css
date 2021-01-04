@@ -4,7 +4,7 @@
   background-color: #041e42;
   color: white;
   margin: 0;
-  padding: 12px 0px;
+  padding: 14px 0px;
   text-align: center;
 }
 
@@ -13,9 +13,10 @@
   /*border-bottom: 1px solid #E1E8EE;*/
   margin-bottom: 50px;
   margin-right:70px;
+  font-size: 14px;
 }
 .product-description span {
-  font-size: 16px;
+  font-size: 14px;
   color: #358ED7;
   font-weight: 500;
   letter-spacing: 1px;
@@ -25,7 +26,7 @@
 
 .main{
   display: grid;
-  grid-template-rows: 60px 1fr 60px;
+  grid-template-rows: 56px 1fr 55px;
   margin: 0;
   min-height: 100vh;
   /*overflow: hidden;*/
@@ -33,13 +34,13 @@
 
 .product-description h5 {
   font-weight: 300;
-  font-size: 34px;
+  font-size: 28px;
   color: #43484D;
   letter-spacing: -2px;
   margin-top: 15px;
 }
 .product-description p {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 300;
   color: #000000;
   line-height: 24px;
@@ -51,16 +52,22 @@
 }
 
 .product-price span {
-  font-size: 26px;
+  font-size: 18px;
   font-weight: 500;
   color: #dc3545;
   margin-right: 20px;
 }
 
 .left-col-img{
-  width:70%;
-  padding-left: 70px;
-  height:400px
+  width: 100%;
+  height: 300px;
+  /*padding-left: 10px;*/
+}
+
+.image-align{
+  text-align: center;
+  vertical-align: middle;
+  margin: 0;
 }
 
 .msg{
@@ -73,31 +80,55 @@
 }
 
 .btn{
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 10px;
 }
 
 .img-thumbnail{
   height:80px;
-  margin:10px;
+  width: 75px;
   padding:0;
+  margin: 0;
+  border-style: solid;
+  border-color: #86989B;
+/*  style="width:75px;height:75px;margin: 0;border-style: solid;border-color: #86989B"*/
 }
 
-@media screen and (max-width: 600px) {
-  .container-fluid{
-    display: block;
-  }
-  .left-col img {
-    width: 100%;
-  }
+.notseller{
+  display: flex;
+  flex-direction: row;
+}
+
+.favBtn, .emailBtn{
+  margin: 2px;
+}
+
+.btn{
+  font-size: 18px;
+}
+
+@media screen and (max-width: 620px) {
+
   .product-description{
-    margin-left: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
   }
+  .container-fluid{
+    margin: 0px 0px 40px 0px;
+  }
+
+  .prod-details{
+    margin: 0;
+  }
 
   .product-description h5 {
-    font-size: 24px;
+    font-size: 22px;
     letter-spacing: 0px;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .notseller{
+    flex-direction: column;
   }
 }

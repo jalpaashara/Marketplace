@@ -26,7 +26,7 @@
                 </button>
               </div>
               <ng-template #favorite>
-                <button class="btn btn-link" (click)="favorites(r)">
+                <button class="btn btn-link " (click)="favorites(r)">
                   <span *ngIf="r.isFav"><fa-icon [icon]="fasHeartIcon" style="color: #ea0046"></fa-icon></span>
                   <span *ngIf="!r.isFav">
                     <fa-icon [icon]="farHeartIcon" style="color: #ea0046"></fa-icon>
